@@ -8,7 +8,7 @@
 import UIKit
 import WENotificationInbox
 
-class PushTableViewCell: UITableViewCell {
+class PushTextTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,7 +19,6 @@ class PushTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var notificationImageView: UIImageView!
     
     @IBOutlet weak var cardView: UIView!
     
@@ -65,20 +64,6 @@ class PushTableViewCell: UITableViewCell {
                 // TODO - Fix FontSize
                 self.timeLabel.font = UIFont.systemFont(ofSize: 14)
             }
-            
-            if let notificationImage = pushMessage.image {
-                if let imageURL = URL(string: notificationImage){
-                    self.prepareCell(withImage: true)
-                    URLSession.shared.dataTask(with: imageURL) { data, response, error in
-                        guard let data = data, error == nil else { return }
-                        DispatchQueue.main.async { // execute on main thread
-                            self.notificationImageView.image = UIImage(data: data)
-                        }
-                    }.resume()
-                }else {
-                    self.prepareCell()
-                }
-            }
         }
         if let status = datasource?.status{
             if #available(iOS 11.0, *) {
@@ -102,20 +87,6 @@ class PushTableViewCell: UITableViewCell {
         self.cardView.layer.shadowOpacity = customStyle.shadowOpacity
         self.deleteButton.setImage(cellStyle.deleteButtonImage, for: .normal)
         self.deleteButton.tintColor = cellStyle.deleteButtonImageTintColor
-    }
-    
-    func prepareCell(withImage: Bool = false) {
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.notificationImageView.translatesAutoresizingMaskIntoConstraints = false
-        if withImage{
-            self.notificationImageView.isHidden = false
-            self.notificationImageView.layer.cornerRadius = self.cellStyle.cornerRadius
-            self.titleLabel.topAnchor.constraint(equalTo: notificationImageView.bottomAnchor,constant: 5).isActive = true
-//            self.notificationImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        }else{
-            self.notificationImageView.isHidden = true
-            self.titleLabel.topAnchor.constraint(equalTo: cardView.topAnchor,constant: 5).isActive = true
-        }
     }
 
     @IBAction func readUnreadButtonClicked(_ sender: Any) {
@@ -144,48 +115,3 @@ class PushTableViewCell: UITableViewCell {
         delegate?.deleteEvent(datasource, sender: sender)
     }
 }
-
-class DefaultTableViewCell: WEPushCellProtocol{
-    var titleFontColor: UIColor = .black
-    
-    var descriptionFontColor: UIColor = .black
-    
-    var timeFontColor: UIColor = .tintColor
-    
-    var titleFont: String = "AndaleMono"
-    
-    var descriptionFont: String = "AndaleMono"
-    
-    var timeFont: String = "AndaleMono"
-    
-    var titleFontSize: CGFloat = 16
-    
-    var descriptionFontSize: CGFloat = 14
-    
-    var timeFontSize: CGFloat = 14
-    
-    var cornerRadius: CGFloat = 6
-    
-    var shadowColor: UIColor = .gray
-    
-    var shadow0ffSetWidth: Int = 0
-    
-    var shadow0ffSetHeight: Int = 1
-    
-    var shadowOpacity: Float = 0.3
-    
-    var cardBackgroundColor: UIColor = .white
-    // TODO - Remove Forced Unwrapping
-    var readButtonImage: UIImage = UIImage(systemName: "envelope.open")!
-    
-    var readButtonImageTintColor: UIColor = .tintColor
-    // TODO - Remove Forced Unwrapping
-    var unReadButtonImage: UIImage = UIImage(systemName: "envelope")!
-    
-    var unReadButtonImageTintColor: UIColor = .orange
-    // TODO - Remove Forced Unwrapping
-    var deleteButtonImage: UIImage = UIImage(systemName: "trash")!
-    
-    var deleteButtonImageTintColor: UIColor = .red
-}
-

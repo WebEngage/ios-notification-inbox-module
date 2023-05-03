@@ -47,16 +47,8 @@ class HomeViewController: UIViewController {
     @IBAction func notificationButtonClick(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "NotificationInbox", bundle: nil)
         let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "NotificationInbox") as! InboxViewController
-
-//      Code to create custom cell
-        let customCell = CustomTableViewCell()
-        inboxViewController.customCell = customCell
-        
-//      Use below code if user want to use default cell
-//      inboxViewController.customCell = DefaultTableViewCell()
         
         self.navigationController?.pushViewController(inboxViewController, animated: true)
-       
     }
     
     private func performLogin() {
@@ -178,49 +170,3 @@ class HomeViewController: UIViewController {
         }
     }
 }
-
-class CustomTableViewCell: WEPushCellProtocol{
-    var titleFontColor: UIColor = .black
-    
-    var descriptionFontColor: UIColor = .black
-    
-    var timeFontColor: UIColor = .tintColor
-    
-    var titleFont: String = "AndaleMono"
-    
-    var descriptionFont: String = "AndaleMono"
-    
-    var timeFont: String = "AndaleMono"
-    
-    var titleFontSize: CGFloat = 16
-    
-    var descriptionFontSize: CGFloat = 14
-    
-    var timeFontSize: CGFloat = 14
-    
-    var cornerRadius: CGFloat = 6
-    
-    var shadowColor: UIColor = .gray
-    
-    var shadow0ffSetWidth: Int = 0
-    
-    var shadow0ffSetHeight: Int = 1
-    
-    var shadowOpacity: Float = 0.3
-    
-    var cardBackgroundColor: UIColor = .white
-    // TODO - Remove Forced Unwrapping
-    var readButtonImage: UIImage = UIImage(systemName: "envelope.open")!
-    
-    var readButtonImageTintColor: UIColor = .tintColor
-    // TODO - Remove Forced Unwrapping
-    var unReadButtonImage: UIImage = UIImage(systemName: "envelope")!
-    
-    var unReadButtonImageTintColor: UIColor = .orange
-    // TODO - Remove Forced Unwrapping
-    var deleteButtonImage: UIImage = UIImage(systemName: "trash")!
-    
-    var deleteButtonImageTintColor: UIColor = .red
-  
-}
-

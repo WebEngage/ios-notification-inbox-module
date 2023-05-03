@@ -14,8 +14,7 @@ class InboxViewController: UIViewController {
     var listOfInboxData = [WEInboxMessage]()
     var hasNextPage = false
     var networkResponse  = ""
-    var cellHeight: CGFloat = 120
-    var customCell: WEPushCellProtocol?
+    var customCell: WEPushCellProtocol? = DefaultTableViewCell()
     
     @IBOutlet weak var inboxTableView: UITableView?
     
@@ -25,7 +24,8 @@ class InboxViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         inboxTableView?.delegate = self
         inboxTableView?.dataSource = self
-        inboxTableView?.register(UINib(nibName: "PushTableViewCell", bundle: nil), forCellReuseIdentifier: "PushCell")
+        inboxTableView?.register(UINib(nibName: "PushBannerTableViewCell", bundle: nil), forCellReuseIdentifier: "PushBannerCell")
+        inboxTableView?.register(UINib(nibName: "PushTextTableViewCell", bundle: nil), forCellReuseIdentifier: "PushTextCell")
         // initializing the refreshControl
         inboxTableView?.refreshControl = UIRefreshControl()
         // add target to UIRefreshControl
@@ -35,7 +35,6 @@ class InboxViewController: UIViewController {
         loadAppInboxData()
         inboxTableView?.isHidden = true
     }
-    
     @objc func callPullToRefresh() {
         updateList(list: [],reset: true)
         loadAppInboxData()
@@ -49,7 +48,6 @@ class InboxViewController: UIViewController {
                 inboxData.status = "READ"
             }
             self.inboxTableView?.reloadData()
-            
         }
         let bulkDelete = UIAction(title: "Bulk Delete"){
             _ in
@@ -66,7 +64,6 @@ class InboxViewController: UIViewController {
 
     }
     
-    
     func updateList(list:[WEInboxMessage],reset:Bool = false){
         if(hasNextPage && !reset){
             self.listOfInboxData += list
@@ -80,7 +77,6 @@ class InboxViewController: UIViewController {
             self.inboxTableView?.reloadData()
         }
     }
-    
     
     func loadAppInboxData(lastInboxData : WEInboxMessage? = nil, shouldResetAllList:Bool = false){
         WENotificationInbox.shared.getNotificationList(lastInboxData: lastInboxData,
@@ -109,20 +105,45 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
         return listOfInboxData.count
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let inboxData = listOfInboxData[indexPath.row]
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "PushCell") as? PushTableViewCell {
-            cell.delegate = self
-            if #available(iOS 13.0, *) {
-                if let customCell = customCell {
-                    cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: customCell)
+        let pushTempleteData  = inboxData.message as? PushNotificationTemplateData
+        let detailDictionary = pushTempleteData?.messageMap
+        if let layout = detailDictionary?["layoutType"] as? String{
+            if layout == "TEXT" {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? PushTextTableViewCell {
+                    cell.delegate = self
+                    if let customCell = customCell {
+                        cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: customCell)
+                    }
+                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
+                    return cell
+                }
+            }
+            else if layout == "BANNER" {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushBannerCell") as? PushBannerTableViewCell {
+                    cell.delegate = self
+                    if let customCell = customCell {
+                        cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: customCell)
+                    }
+                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
+                    return cell
                 }
             } else {
-                // Fallback on earlier versions
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? PushTextTableViewCell {
+                    cell.delegate = self
+                    if let customCell = customCell {
+                        cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: customCell)
+                    }
+                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
+                    return cell
+                }
             }
-            cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
-            return cell
+            
         }
+       
         return UITableViewCell()
     }
     
@@ -134,17 +155,6 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-////        if let inboxImage = listOfInboxData[indexPath.row].message as? PushNotificationTemplateData{
-////            if inboxImage.image != "" {
-////                return 320
-////            } else {
-////                return UITableView.automaticDimension
-////            }
-////        }
-//        return UITableView.automaticDimension
-//    }
 }
 extension InboxViewController: InboxCellDelegate {
     func clickEvent(_ inboxData: WEInboxMessage?) {
