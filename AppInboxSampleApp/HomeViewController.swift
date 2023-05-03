@@ -47,6 +47,8 @@ class HomeViewController: UIViewController {
     @IBAction func notificationButtonClick(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "NotificationInbox", bundle: nil)
         let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "NotificationInbox") as! InboxViewController
+
+//      Code to create custom cell
         let customCell = CustomTableViewCell()
         inboxViewController.customCell = customCell
         
