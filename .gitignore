@@ -116,5 +116,4 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
-
-# End of https://www.toptal.com/developers/gitignore/api/swift,macos
+/Pods

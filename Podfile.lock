@@ -1,0 +1,21 @@
+PODS:
+  - WebEngage (6.3.0)
+  - WENotificationInbox (1.0.0):
+    - WebEngage (>= 6.0)
+
+DEPENDENCIES:
+  - WebEngage
+  - WENotificationInbox
+
+SPEC REPOS:
+  trunk:
+    - WebEngage
+    - WENotificationInbox
+
+SPEC CHECKSUMS:
+  WebEngage: 05214350598c714b4ee08f49645034020de90b7e
+  WENotificationInbox: 81208f4751eaee0e4ccb4ac6c7566a65532b3cdd
+
+PODFILE CHECKSUM: 1a00054fb7b3d6f39af65d46d07bc56203e3d412
+
+COCOAPODS: 1.11.3
