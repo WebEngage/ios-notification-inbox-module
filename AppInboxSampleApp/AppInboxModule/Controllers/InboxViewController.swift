@@ -15,7 +15,7 @@ class InboxViewController: UIViewController {
     var hasNextPage = false
     var networkResponse  = ""
     var cellHeight: CGFloat = 120
-    var defaultCell = DefaultTableViewCell()
+    var customCell: WEPushCellProtocol?
     
     @IBOutlet weak var inboxTableView: UITableView?
     
@@ -114,7 +114,9 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PushCell") as? PushTableViewCell {
             cell.delegate = self
             if #available(iOS 13.0, *) {
-                cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: defaultCell)
+                if let customCell = customCell {
+                    cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: customCell)
+                }
             } else {
                 // Fallback on earlier versions
             }
