@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Utils{
+struct WEUtils{
     
     static func getAttributedString(rawString: String) -> NSAttributedString {
         var text:NSAttributedString = NSAttributedString()

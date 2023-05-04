@@ -12,11 +12,7 @@ import WENotificationInbox
 class HomeViewController: UIViewController {
     struct Constants {
         
-        static let license  = "stg~11b56440c"
-        static let webEngageKey = "WebEngage"
         static let login = "UserDefaults.loginID"
-        static let licenseCodeKey = "licenseCode"
-        static let JWTTokenKey = "Webengage.JWTToken"
         static let badgeSize: CGFloat = 18
         static let badgeTag: Int = 12
     }
@@ -45,8 +41,14 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func notificationButtonClick(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "NotificationInbox", bundle: nil)
-        let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "NotificationInbox") as! InboxViewController
+        let storyBoard: UIStoryboard = UIStoryboard(name: "WENotificationInbox", bundle: nil)
+        let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "WENotificationInbox") as! WENotificationInboxViewController
+        
+        var customConfig = CustomConfiguration()
+//        customConfig.cornerRadius = 10
+//        customConfig.cardBackgroundColor = .brown
+        customConfig.cornerRadius = 10
+        inboxViewController.customConfiguration = customConfig 
         
         self.navigationController?.pushViewController(inboxViewController, animated: true)
     }
@@ -169,4 +171,18 @@ class HomeViewController: UIViewController {
             self.navigationItem.rightBarButtonItems?.append(UIBarButtonItem(customView:notificationButton))
         }
     }
+}
+
+class CustomConfiguration: WEPushCardConfigutationProtocol{
+    var cornerRadius: CGFloat = 4
+    
+    var shadowColor: UIColor = .blue
+    
+    var shadow0ffSetWidth: Int = 0
+    
+    var shadow0ffSetHeight: Int = 1
+    
+    var shadowOpacity: Float = 0.3
+    
+    var cardBackgroundColor: UIColor = .cyan
 }

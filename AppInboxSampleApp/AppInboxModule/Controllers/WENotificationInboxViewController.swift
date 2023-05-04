@@ -9,12 +9,13 @@ import Foundation
 import UIKit
 import WENotificationInbox
 
-class InboxViewController: UIViewController {
+class WENotificationInboxViewController: UIViewController {
     
     var listOfInboxData = [WEInboxMessage]()
     var hasNextPage = false
     var networkResponse  = ""
-    var customCell: WEPushCellProtocol? = DefaultTableViewCell()
+    var customConfiguration: AnyObject?
+    var defaultConfiguration: WEPushCellConfigurationProtocol? = DefaultCellConfiguration()
     
     @IBOutlet weak var inboxTableView: UITableView?
     
@@ -24,8 +25,8 @@ class InboxViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         inboxTableView?.delegate = self
         inboxTableView?.dataSource = self
-        inboxTableView?.register(UINib(nibName: "PushBannerTableViewCell", bundle: nil), forCellReuseIdentifier: "PushBannerCell")
-        inboxTableView?.register(UINib(nibName: "PushTextTableViewCell", bundle: nil), forCellReuseIdentifier: "PushTextCell")
+        inboxTableView?.register(UINib(nibName: "WEPushBannerTableViewCell", bundle: nil), forCellReuseIdentifier: "PushBannerCell")
+        inboxTableView?.register(UINib(nibName: "WEPushTextTableViewCell", bundle: nil), forCellReuseIdentifier: "PushTextCell")
         // initializing the refreshControl
         inboxTableView?.refreshControl = UIRefreshControl()
         // add target to UIRefreshControl
@@ -41,16 +42,17 @@ class InboxViewController: UIViewController {
     }
     
     @IBAction func moreButtonClicked(_ sender: UIBarButtonItem) {
-        let readAll = UIAction(title: "Read All"){
-            _ in
-        WENotificationInbox.shared.markStatus(self.listOfInboxData, status: .READ)
-            for inboxData in self.listOfInboxData{
-                inboxData.status = "READ"
-            }
-            self.inboxTableView?.reloadData()
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+
+        let action1 = UIAlertAction(title: "Read All", style: .default) { (_) in
+            WENotificationInbox.shared.markStatus(self.listOfInboxData, status: .READ)
+                for inboxData in self.listOfInboxData{
+                    inboxData.status = "READ"
+                }
+                self.inboxTableView?.reloadData()
         }
-        let bulkDelete = UIAction(title: "Bulk Delete"){
-            _ in
+
+        let action2 = UIAlertAction(title: "Bulk Delete", style: .default) { (_) in
             for inboxData in self.listOfInboxData {
 //                inboxData.markDelete()
                 self.listOfInboxData = []
@@ -59,9 +61,10 @@ class InboxViewController: UIViewController {
                 print("Bulk Delete...")
             }
         }
-        let menu = UIMenu(children: [readAll,bulkDelete])
-        sender.menu = menu
+        alertController.addAction(action1)
+        alertController.addAction(action2)
 
+        present(alertController, animated: true, completion: nil)
     }
     
     func updateList(list:[WEInboxMessage],reset:Bool = false){
@@ -94,7 +97,7 @@ class InboxViewController: UIViewController {
     }
 }
 
-extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
+extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("APPINBOX you selected one of the cell")
         let inboxData = listOfInboxData[indexPath.row]
@@ -113,31 +116,31 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
         let detailDictionary = pushTempleteData?.messageMap
         if let layout = detailDictionary?["layoutType"] as? String{
             if layout == "TEXT" {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? PushTextTableViewCell {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? WEPushTextTableViewCell {
                     cell.delegate = self
-                    if let customCell = customCell {
-                        cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: customCell)
+                    if let customCell = customConfiguration {
+                        cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
                     }
-                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
+//                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
                     return cell
                 }
             }
             else if layout == "BANNER" {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushBannerCell") as? PushBannerTableViewCell {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushBannerCell") as? WEPushBannerTableViewCell {
                     cell.delegate = self
-                    if let customCell = customCell {
-                        cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: customCell)
+                    if let customCell = defaultConfiguration {
+                        cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
                     }
-                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
+//                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
                     return cell
                 }
             } else {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? PushTextTableViewCell {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? WEPushTextTableViewCell {
                     cell.delegate = self
-                    if let customCell = customCell {
-                        cell.setupCell(inboxData: inboxData, index: indexPath.row, customStyle: customCell)
-                    }
-                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
+                    let customCell = defaultConfiguration as AnyObject 
+                    cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+                    
+//                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
                     return cell
                 }
             }
@@ -156,7 +159,7 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-extension InboxViewController: InboxCellDelegate {
+extension WENotificationInboxViewController: InboxCellDelegate {
     func clickEvent(_ inboxData: WEInboxMessage?) {
         inboxData?.trackClick()
     }

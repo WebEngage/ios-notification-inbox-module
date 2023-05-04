@@ -8,7 +8,7 @@
 import UIKit
 import WENotificationInbox
 
-class PushTextTableViewCell: UITableViewCell {
+class WEPushTextTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,7 +24,8 @@ class PushTextTableViewCell: UITableViewCell {
     
     weak var delegate: InboxCellDelegate?
     var datasource: WEInboxMessage?
-    var cellStyle: WEPushCellProtocol  = DefaultTableViewCell()
+    var cellStyle: WEPushCellConfigurationProtocol = DefaultCellConfiguration()
+    var customConfiguration: WEPushCellConfigurationProtocol?
     
     
     override func awakeFromNib() {
@@ -36,21 +37,24 @@ class PushTextTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupCell(inboxData: WEInboxMessage, index: Int, customStyle: WEPushCellProtocol) {
+    func setupCell(inboxData: WEInboxMessage, index: Int, cellConfiguration: AnyObject) {
         datasource = inboxData
-        self.cellStyle = customStyle
+        customConfiguration = setupCustomConfiguration(customConfiguration: cellConfiguration)
+        
+//        self.customConfiguration = cellConfiguration
+//        self.cellStyle = cellConfiguration
         
         if let pushMessage = datasource?.message as? PushNotificationTemplateData{
             if let title = pushMessage.title {
-                self.titleLabel.attributedText = Utils.getAttributedString(rawString: title)
-                self.titleLabel.font = UIFont(name: cellStyle.titleFont, size: cellStyle.titleFontSize)
+                self.titleLabel.attributedText = WEUtils.getAttributedString(rawString: title)
+                self.titleLabel.font = UIFont(name: customConfiguration?.titleFont ?? cellStyle.titleFont, size: cellStyle.titleFontSize)
 //                self.titleLabel.textColor = cellStyle.titleFontColor
                 // TODO - Fix FontSize
                 self.titleLabel.font = UIFont.systemFont(ofSize: 16)
             }
             
             if let description = pushMessage.body{
-                self.descriptionLabel.attributedText = Utils.getAttributedString(rawString: description)
+                self.descriptionLabel.attributedText = WEUtils.getAttributedString(rawString: description)
                 self.descriptionLabel.font = UIFont(name: cellStyle.descriptionFont, size: cellStyle.descriptionFontSize)
 //                self.descriptionLabel.textColor = cellStyle.descriptionFontColor
                 // TODO - Fix FontSize
@@ -58,7 +62,7 @@ class PushTextTableViewCell: UITableViewCell {
             }
             
             if let notificationTime = datasource?.creationTime{
-                self.timeLabel.text = "\(Utils.getTimeAgo(notificationTime: notificationTime)) ago."
+                self.timeLabel.text = "\(WEUtils.getTimeAgo(notificationTime: notificationTime)) ago."
                 self.timeLabel.font = UIFont(name: cellStyle.timeFont, size: 12)
                 self.timeLabel.textColor = cellStyle.timeFontColor
                 // TODO - Fix FontSize
@@ -71,7 +75,7 @@ class PushTextTableViewCell: UITableViewCell {
                     let image = cellStyle.unReadButtonImage
                     self.readUnreadButton.setImage(image, for: .normal)
                     self.readUnreadButton.tintColor = cellStyle.unReadButtonImageTintColor
-                    self.cardView.backgroundColor = customStyle.cardBackgroundColor.withAlphaComponent(0.6)
+                    self.cardView.backgroundColor = cellStyle.cardBackgroundColor.withAlphaComponent(0.6)
                 } else if status == "READ" {
                     let image = cellStyle.readButtonImage
                     self.readUnreadButton.setImage(image, for: .normal)
@@ -81,12 +85,19 @@ class PushTextTableViewCell: UITableViewCell {
             }
         }
         
-        self.cardView.layer.cornerRadius = customStyle.cornerRadius
-        self.cardView.layer.shadowColor = customStyle.shadowColor.cgColor
-        self.cardView.layer.shadowOffset = CGSize(width: customStyle.shadow0ffSetWidth, height: customStyle.shadow0ffSetHeight)
-        self.cardView.layer.shadowOpacity = customStyle.shadowOpacity
+        self.cardView.layer.cornerRadius = cellStyle.cornerRadius
+        self.cardView.layer.shadowColor = cellStyle.shadowColor.cgColor
+        self.cardView.layer.shadowOffset = CGSize(width: cellStyle.shadow0ffSetWidth, height: cellStyle.shadow0ffSetHeight)
+        self.cardView.layer.shadowOpacity = cellStyle.shadowOpacity
         self.deleteButton.setImage(cellStyle.deleteButtonImage, for: .normal)
         self.deleteButton.tintColor = cellStyle.deleteButtonImageTintColor
+    }
+    
+    func setupCustomConfiguration(customConfiguration: AnyObject)-> WEPushCellConfigurationProtocol? {
+        
+        
+        
+        return nil
     }
 
     @IBAction func readUnreadButtonClicked(_ sender: Any) {
