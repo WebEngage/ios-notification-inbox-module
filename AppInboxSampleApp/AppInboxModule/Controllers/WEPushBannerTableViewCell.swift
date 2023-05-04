@@ -25,7 +25,8 @@ class WEPushBannerTableViewCell: UITableViewCell {
     
     weak var delegate: InboxCellDelegate?
     var datasource: WEInboxMessage?
-    var cellStyle: WEPushCellConfigurationProtocol  = DefaultCellConfiguration()
+    var cellStyle = DefaultCellConfiguration()
+    var customConfiguration: WEPushCellConfigurationProtocol?
     
     
     override func awakeFromNib() {
@@ -37,8 +38,10 @@ class WEPushBannerTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupCell(inboxData: WEInboxMessage, index: Int, cellConfiguration: WEPushCellConfigurationProtocol) {
+    func setupCell(inboxData: WEInboxMessage, index: Int, cellConfiguration: AnyObject) {
         datasource = inboxData
+        setupCustomConfiguration(customConfiguration: cellConfiguration)
+        
 //        self.cellStyle = cellConfiguration
         
         if let pushMessage = datasource?.message as? PushNotificationTemplateData{
@@ -100,6 +103,44 @@ class WEPushBannerTableViewCell: UITableViewCell {
             self.cardView.layer.shadowOpacity = cellStyle.shadowOpacity
             self.deleteButton.setImage(cellStyle.deleteButtonImage, for: .normal)
             self.deleteButton.tintColor = cellStyle.deleteButtonImageTintColor
+        }
+    }
+    
+    func setupCustomConfiguration(customConfiguration: AnyObject){
+        
+        if let customConfig = customConfiguration as? WEPushCardConfigutationProtocol{
+            cellStyle.cornerRadius = customConfig.cornerRadius
+            cellStyle.shadowColor = customConfig.shadowColor
+            cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
+            cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
+            cellStyle.shadowOpacity = customConfig.shadowOpacity
+            cellStyle.cardBackgroundColor = customConfig.cardBackgroundColor
+        }
+        
+        if let customConfig =  customConfiguration as? WEPushButtonConfigurationProtocol{
+            cellStyle.readButtonImage = customConfig.readButtonImage
+            cellStyle.readButtonImageTintColor = customConfig.readButtonImageTintColor
+            cellStyle.unReadButtonImage = customConfig.unReadButtonImage
+            cellStyle.unReadButtonImageTintColor = customConfig.unReadButtonImageTintColor
+            cellStyle.deleteButtonImage = customConfig.deleteButtonImage
+            cellStyle.deleteButtonImageTintColor = customConfig.deleteButtonImageTintColor
+        }
+        
+        if let customConfig =  customConfiguration as? WEPushLabelConfigurationProtocol{
+            cellStyle.titleFont = customConfig.titleFont
+            cellStyle.titleFontSize = customConfig.titleFontSize
+            cellStyle.titleFontColor = customConfig.titleFontColor
+            cellStyle.descriptionFont = customConfig.descriptionFont
+            cellStyle.descriptionFontSize = customConfig.descriptionFontSize
+            cellStyle.descriptionFontColor = customConfig.descriptionFontColor
+            
+            cellStyle.timeFont = customConfig.timeFont
+            cellStyle.timeFontSize = customConfig.timeFontSize
+            cellStyle.timeFontColor = customConfig.timeFontColor
+        }
+        
+        if let customConfig =  customConfiguration as? WEPushBannerConfigurationProtocol{
+            cellStyle.imageViewCornerRadius = customConfig.imageViewCornerRadius
         }
     }
     

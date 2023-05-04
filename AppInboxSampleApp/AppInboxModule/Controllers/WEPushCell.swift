@@ -68,7 +68,7 @@ protocol WEPushLabelConfigurationProtocol {
     var timeFontColor: UIColor {get set}
 }
 
-protocol WEPushBannerConfigurationProtocol: WEPushLabelConfigurationProtocol  {
+protocol WEPushBannerConfigurationProtocol  {
     var imageViewCornerRadius: CGFloat {get set}
 }
 

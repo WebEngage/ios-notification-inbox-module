@@ -118,9 +118,9 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
             if layout == "TEXT" {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? WEPushTextTableViewCell {
                     cell.delegate = self
-                    if let customCell = customConfiguration {
-                        cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                    }
+                    let customCell = customConfiguration as AnyObject
+                    cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+
 //                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
                     return cell
                 }
@@ -128,16 +128,16 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
             else if layout == "BANNER" {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "PushBannerCell") as? WEPushBannerTableViewCell {
                     cell.delegate = self
-                    if let customCell = defaultConfiguration {
-                        cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                    }
+                    let customCell = customConfiguration as AnyObject
+                    cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+                    
 //                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
                     return cell
                 }
             } else {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? WEPushTextTableViewCell {
                     cell.delegate = self
-                    let customCell = defaultConfiguration as AnyObject 
+                    let customCell = customConfiguration as AnyObject 
                     cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
                     
 //                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
