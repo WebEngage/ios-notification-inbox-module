@@ -45,8 +45,9 @@ class HomeViewController: UIViewController {
         let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "WENotificationInbox") as! WENotificationInboxViewController
         
         var customConfig = CustomConfiguration()
-        customConfig.cornerRadius = 20
-        customConfig.cardBackgroundColor = .systemPink
+        customConfig.cornerRadius = 6
+        customConfig.cardBackgroundColor = .brown
+        
         inboxViewController.customConfiguration = customConfig
         
         self.navigationController?.pushViewController(inboxViewController, animated: true)
@@ -172,12 +173,10 @@ class HomeViewController: UIViewController {
     }
 }
 
-class CustomConfiguration: WEPushCardConfigutationProtocol,WEPushBannerConfigurationProtocol{
-    var imageViewCornerRadius: CGFloat = 6
-    
+class CustomConfiguration: WEPushCardConfigutationProtocol{
     var cornerRadius: CGFloat = 6
     
-    var shadowColor: UIColor = .blue
+    var shadowColor: UIColor = .darkGray
     
     var shadow0ffSetWidth: Int = 0
     
@@ -185,5 +184,7 @@ class CustomConfiguration: WEPushCardConfigutationProtocol,WEPushBannerConfigura
     
     var shadowOpacity: Float = 0.3
     
-    var cardBackgroundColor: UIColor = .cyan
+    var cardBackgroundColor: UIColor = .white
+    
+
 }

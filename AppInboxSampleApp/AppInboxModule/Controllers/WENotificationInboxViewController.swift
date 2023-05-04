@@ -120,8 +120,6 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
                     cell.delegate = self
                     let customCell = customConfiguration as AnyObject
                     cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-
-//                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
                     return cell
                 }
             }
@@ -130,8 +128,6 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
                     cell.delegate = self
                     let customCell = customConfiguration as AnyObject
                     cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                    
-//                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
                     return cell
                 }
             } else {
@@ -139,8 +135,6 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
                     cell.delegate = self
                     let customCell = customConfiguration as AnyObject 
                     cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                    
-//                    cell.contentView.backgroundColor = UIColor(white: 0.98, alpha: 1)
                     return cell
                 }
             }
@@ -177,7 +171,7 @@ extension WENotificationInboxViewController: InboxCellDelegate {
     }
     
     func deleteEvent(_ inboxData: WEInboxMessage?, sender : Any) {
-        inboxData?.markDelete()
+//        inboxData?.markDelete()
         if let sender = sender as? UIButton{
             let point = sender.convert(CGPoint.zero, to: inboxTableView)
             guard let indexPath = inboxTableView?.indexPathForRow(at: point)

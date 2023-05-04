@@ -47,24 +47,32 @@ class WEPushBannerTableViewCell: UITableViewCell {
         if let pushMessage = datasource?.message as? PushNotificationTemplateData{
             if let title = pushMessage.title {
                 self.titleLabel.attributedText = WEUtils.getAttributedString(rawString: title)
-                self.titleLabel.font = UIFont(name: cellStyle.titleFont, size: cellStyle.titleFontSize)
-                //                self.titleLabel.textColor = cellStyle.titleFontColor
+                if cellStyle.titleFont != ""{
+                    self.titleLabel.font = UIFont(name: cellStyle.titleFont, size: cellStyle.titleFontSize)
+                    self.titleLabel.textColor = cellStyle.titleFontColor
+                }
+                
+                //
                 // TODO - Fix FontSize
                 self.titleLabel.font = UIFont.systemFont(ofSize: 16)
             }
             
             if let description = pushMessage.body{
                 self.descriptionLabel.attributedText = WEUtils.getAttributedString(rawString: description)
-                self.descriptionLabel.font = UIFont(name: cellStyle.descriptionFont, size: cellStyle.descriptionFontSize)
-                //                self.descriptionLabel.textColor = cellStyle.descriptionFontColor
+                if cellStyle.descriptionFont != "" {
+                    self.descriptionLabel.font = UIFont(name: cellStyle.descriptionFont, size: cellStyle.descriptionFontSize)
+                    //                self.descriptionLabel.textColor = cellStyle.descriptionFontColor
+                }
                 // TODO - Fix FontSize
                 self.descriptionLabel.font = UIFont.systemFont(ofSize: 14)
             }
             
             if let notificationTime = datasource?.creationTime{
                 self.timeLabel.text = "\(WEUtils.getTimeAgo(notificationTime: notificationTime)) ago."
-                self.timeLabel.font = UIFont(name: cellStyle.timeFont, size: 12)
-                self.timeLabel.textColor = cellStyle.timeFontColor
+                if cellStyle.timeFont != "" {
+                    self.timeLabel.font = UIFont(name: cellStyle.timeFont, size: 12)
+                    self.timeLabel.textColor = cellStyle.timeFontColor
+                }
                 // TODO - Fix FontSize
                 self.timeLabel.font = UIFont.systemFont(ofSize: 14)
             }
@@ -77,9 +85,21 @@ class WEPushBannerTableViewCell: UITableViewCell {
                         DispatchQueue.main.async { // execute on main thread
                             self.notificationImageView.layer.cornerRadius = self.cellStyle.imageViewCornerRadius
                             self.notificationImageView.image = UIImage(data: data)
+                            let data = self.notificationImageView.contentMode
                         }
                     }.resume()
                 }
+            }
+            if !(cellStyle.readUnreadButtonVisibility) {
+                readUnreadButton.isHidden = true
+            } else {
+                readUnreadButton.isHidden = false
+            }
+            
+            if !(cellStyle.deleteButtonVisibility){
+                deleteButton.isHidden = true
+            } else {
+                deleteButton.isHidden = false
             }
             if let status = datasource?.status{
                 if #available(iOS 11.0, *) {
@@ -117,16 +137,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
             cellStyle.cardBackgroundColor = customConfig.cardBackgroundColor
         }
         
-        if let customConfig =  customConfiguration as? WEPushButtonConfigurationProtocol{
-            cellStyle.readButtonImage = customConfig.readButtonImage
-            cellStyle.readButtonImageTintColor = customConfig.readButtonImageTintColor
-            cellStyle.unReadButtonImage = customConfig.unReadButtonImage
-            cellStyle.unReadButtonImageTintColor = customConfig.unReadButtonImageTintColor
-            cellStyle.deleteButtonImage = customConfig.deleteButtonImage
-            cellStyle.deleteButtonImageTintColor = customConfig.deleteButtonImageTintColor
-        }
-        
-        if let customConfig =  customConfiguration as? WEPushLabelConfigurationProtocol{
+        if let customConfig =  customConfiguration as? WEPushTextConfigurationProtocol{
             cellStyle.titleFont = customConfig.titleFont
             cellStyle.titleFontSize = customConfig.titleFontSize
             cellStyle.titleFontColor = customConfig.titleFontColor
@@ -137,10 +148,20 @@ class WEPushBannerTableViewCell: UITableViewCell {
             cellStyle.timeFont = customConfig.timeFont
             cellStyle.timeFontSize = customConfig.timeFontSize
             cellStyle.timeFontColor = customConfig.timeFontColor
+            
+            cellStyle.readButtonImage = customConfig.readButtonImage
+            cellStyle.readButtonImageTintColor = customConfig.readButtonImageTintColor
+            cellStyle.unReadButtonImage = customConfig.unReadButtonImage
+            cellStyle.unReadButtonImageTintColor = customConfig.unReadButtonImageTintColor
+            cellStyle.deleteButtonImage = customConfig.deleteButtonImage
+            cellStyle.deleteButtonImageTintColor = customConfig.deleteButtonImageTintColor
+            cellStyle.readUnreadButtonVisibility = customConfig.readUnreadButtonVisibility
+            cellStyle.deleteButtonVisibility = customConfig.deleteButtonVisibility
         }
         
         if let customConfig =  customConfiguration as? WEPushBannerConfigurationProtocol{
             cellStyle.imageViewCornerRadius = customConfig.imageViewCornerRadius
+            cellStyle.imageViewAspectRatio = customConfig.imageViewAspectRatio
         }
     }
     
