@@ -26,7 +26,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
     weak var delegate: InboxCellDelegate?
     var datasource: WEInboxMessage?
     var cellStyle = DefaultCellConfiguration()
-    var customConfiguration: WEPushCellConfigurationProtocol?
+    var customConfiguration: WEPushConfigurationProtocol?
     
     
     override func awakeFromNib() {
@@ -79,13 +79,12 @@ class WEPushBannerTableViewCell: UITableViewCell {
             
             if let notificationImage = pushMessage.image {
                 if let imageURL = URL(string: notificationImage){
-                    self.notificationImageView.image = nil
+                    
                     URLSession.shared.dataTask(with: imageURL) { data, response, error in
                         guard let data = data, error == nil else { return }
                         DispatchQueue.main.async { // execute on main thread
-                            self.notificationImageView.layer.cornerRadius = self.cellStyle.imageViewCornerRadius
+                           
                             self.notificationImageView.image = UIImage(data: data)
-                            let data = self.notificationImageView.contentMode
                         }
                     }.resume()
                 }
@@ -123,6 +122,9 @@ class WEPushBannerTableViewCell: UITableViewCell {
             self.cardView.layer.shadowOpacity = cellStyle.shadowOpacity
             self.deleteButton.setImage(cellStyle.deleteButtonImage, for: .normal)
             self.deleteButton.tintColor = cellStyle.deleteButtonImageTintColor
+            self.notificationImageView.layer.cornerRadius = self.cellStyle.imageViewCornerRadius
+            self.notificationImageView.image = nil
+            self.notificationImageView.contentMode = cellStyle.imageViewContentMode
         }
     }
     
@@ -161,7 +163,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
         
         if let customConfig =  customConfiguration as? WEPushBannerConfigurationProtocol{
             cellStyle.imageViewCornerRadius = customConfig.imageViewCornerRadius
-            cellStyle.imageViewAspectRatio = customConfig.imageViewAspectRatio
+            cellStyle.imageViewContentMode = customConfig.imageViewContentMode
         }
     }
     

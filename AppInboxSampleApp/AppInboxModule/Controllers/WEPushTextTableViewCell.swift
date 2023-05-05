@@ -25,7 +25,7 @@ class WEPushTextTableViewCell: UITableViewCell {
     weak var delegate: InboxCellDelegate?
     var datasource: WEInboxMessage?
     var cellStyle = DefaultCellConfiguration()
-    var customConfiguration: WEPushCellConfigurationProtocol?
+    var customConfiguration: WEPushConfigurationProtocol?
     
     
     override func awakeFromNib() {
@@ -149,7 +149,7 @@ class WEPushTextTableViewCell: UITableViewCell {
         
         if let customConfig =  customConfiguration as? WEPushBannerConfigurationProtocol{
             cellStyle.imageViewCornerRadius = customConfig.imageViewCornerRadius
-            cellStyle.imageViewAspectRatio = customConfig.imageViewAspectRatio
+            cellStyle.imageViewContentMode = customConfig.imageViewContentMode
         }
     }
 

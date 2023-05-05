@@ -15,14 +15,14 @@ class WENotificationInboxViewController: UIViewController {
     var hasNextPage = false
     var networkResponse  = ""
     var customConfiguration: AnyObject?
-    var defaultConfiguration: WEPushCellConfigurationProtocol? = DefaultCellConfiguration()
+    var defaultConfiguration: WEPushConfigurationProtocol? = DefaultCellConfiguration()
     
+    @IBOutlet weak var optionMenu: UIBarButtonItem!
     @IBOutlet weak var inboxTableView: UITableView?
     
     @IBOutlet weak var noNotificationsView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
         inboxTableView?.delegate = self
         inboxTableView?.dataSource = self
         inboxTableView?.register(UINib(nibName: "WEPushBannerTableViewCell", bundle: nil), forCellReuseIdentifier: "PushBannerCell")
@@ -31,9 +31,13 @@ class WENotificationInboxViewController: UIViewController {
         inboxTableView?.refreshControl = UIRefreshControl()
         // add target to UIRefreshControl
         inboxTableView?.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
-//        inboxTableView?.estimatedRowHeight = 320
-//        inboxTableView?.rowHeight = UITableView.automaticDimension
         loadAppInboxData()
+        setupCustomConfiguration(customConfiguration: (customConfiguration as AnyObject))
+        self.view.backgroundColor = defaultConfiguration?.navigationBarColor
+        self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
+        self.navigationItem.title = defaultConfiguration?.navigationTitle
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: defaultConfiguration?.navigationTitleColor as Any]
+        optionMenu.image = defaultConfiguration?.optionMenuImage
         inboxTableView?.isHidden = true
     }
     @objc func callPullToRefresh() {
@@ -41,10 +45,10 @@ class WENotificationInboxViewController: UIViewController {
         loadAppInboxData()
     }
     
-    @IBAction func moreButtonClicked(_ sender: UIBarButtonItem) {
+    @IBAction func optionMenuButtonClicked(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
 
-        let action1 = UIAlertAction(title: "Read All", style: .default) { (_) in
+        let action1 = UIAlertAction(title: defaultConfiguration?.optionMenuItems[0], style: .default) { (_) in
             WENotificationInbox.shared.markStatus(self.listOfInboxData, status: .READ)
                 for inboxData in self.listOfInboxData{
                     inboxData.status = "READ"
@@ -52,7 +56,7 @@ class WENotificationInboxViewController: UIViewController {
                 self.inboxTableView?.reloadData()
         }
 
-        let action2 = UIAlertAction(title: "Bulk Delete", style: .default) { (_) in
+        let action2 = UIAlertAction(title: defaultConfiguration?.optionMenuItems[1], style: .default) { (_) in
             for inboxData in self.listOfInboxData {
 //                inboxData.markDelete()
                 self.listOfInboxData = []
@@ -65,6 +69,18 @@ class WENotificationInboxViewController: UIViewController {
         alertController.addAction(action2)
 
         present(alertController, animated: true, completion: nil)
+    }
+    func setupCustomConfiguration(customConfiguration: AnyObject){
+        
+        if let customConfig = customConfiguration as? WEViewControllerConfigurationProtocol{
+            defaultConfiguration?.navigationTitle = customConfig.navigationTitle
+            defaultConfiguration?.navigationTitleColor = customConfig.navigationTitleColor
+            defaultConfiguration?.optionMenuItems = customConfig.optionMenuItems
+            defaultConfiguration?.optionMenuImage = customConfig.optionMenuImage
+            defaultConfiguration?.navigationBarColor = customConfig.navigationBarColor
+            defaultConfiguration?.navigationBarTintColor = customConfig.navigationBarTintColor
+        }
+        
     }
     
     func updateList(list:[WEInboxMessage],reset:Bool = false){

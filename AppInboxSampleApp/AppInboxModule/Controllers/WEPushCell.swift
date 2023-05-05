@@ -9,8 +9,11 @@ import Foundation
 
 protocol WEViewControllerConfigurationProtocol{
     var navigationTitle:String {get set}
-    var tableviewBackgroundColor: String {get set}
+    var navigationTitleColor: UIColor {get set}
     var optionMenuItems: [String] {get set}
+    var optionMenuImage: UIImage {get set}
+    var navigationBarColor : UIColor {get set}
+    var navigationBarTintColor: UIColor {get set}
 }
 
 protocol WEPushCardConfigutationProtocol {
@@ -47,15 +50,27 @@ protocol WEPushTextConfigurationProtocol {
 
 protocol WEPushBannerConfigurationProtocol: WEPushTextConfigurationProtocol  {
     var imageViewCornerRadius: CGFloat {get set}
-    var imageViewAspectRatio: UIView.ContentMode {get set}
+    var imageViewContentMode: UIView.ContentMode {get set}
 }
 
-protocol WEPushCellConfigurationProtocol: WEPushCardConfigutationProtocol,WEPushTextConfigurationProtocol,WEPushBannerConfigurationProtocol  {
+protocol WEPushConfigurationProtocol: WEPushCardConfigutationProtocol,WEPushTextConfigurationProtocol,WEPushBannerConfigurationProtocol,WEViewControllerConfigurationProtocol {
     
 }
 
-class DefaultCellConfiguration: WEPushCellConfigurationProtocol{
-    var imageViewAspectRatio: UIView.ContentMode = .scaleAspectFill
+class DefaultCellConfiguration: WEPushConfigurationProtocol{
+    var navigationTitleColor: UIColor = .black
+    
+    var optionMenuImage: UIImage = UIImage(systemName: "ellipsis.circle")!
+    
+    var navigationBarColor: UIColor = .white
+    
+    var navigationBarTintColor: UIColor = .tintColor
+    
+    var navigationTitle: String = "Notification-Inbox"
+    
+    var optionMenuItems: [String] = ["Read All", "Bulk Delete"]
+    
+    var imageViewContentMode: UIView.ContentMode = .scaleAspectFill
     
     var readUnreadButtonVisibility: Bool = true
     
