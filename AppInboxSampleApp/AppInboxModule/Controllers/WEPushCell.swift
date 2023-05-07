@@ -37,6 +37,7 @@ protocol WEPushTextConfigurationProtocol {
     var timeFont: String {get set}
     var timeFontSize: CGFloat {get set}
     var timeFontColor: UIColor {get set}
+    var timeFormat: String {get set}
     
     var readButtonImage: UIImage {get set}
     var readButtonImageTintColor: UIColor {get set}
@@ -58,6 +59,8 @@ protocol WEPushConfigurationProtocol: WEPushCardConfigutationProtocol,WEPushText
 }
 
 class DefaultCellConfiguration: WEPushConfigurationProtocol{
+    var timeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
     var navigationTitleColor: UIColor = .black
     
     var optionMenuImage: UIImage = UIImage(systemName: "ellipsis.circle")!

@@ -68,7 +68,20 @@ class WEPushTextTableViewCell: UITableViewCell {
             }
             
             if let notificationTime = datasource?.creationTime{
-                self.timeLabel.text = "\(WEUtils.getTimeAgo(notificationTime: notificationTime)) ago."
+                
+                if cellStyle.timeFormat == "yyyy-MM-dd'T'HH:mm:ss.SSSZ" {
+                    self.timeLabel.text = "\(WEUtils.getTimeAgo(notificationTime: notificationTime)) ago."
+                }else{
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    if let date = dateFormatter.date(from: notificationTime) {
+                        dateFormatter.dateFormat = cellStyle.timeFormat
+                        let formattedDate = dateFormatter.string(from: date)
+                        self.timeLabel.text = formattedDate.description
+                    }
+                    
+                }
                 if cellStyle.timeFont != "" {
                     self.timeLabel.font = UIFont(name: cellStyle.timeFont, size: 12)
                     self.timeLabel.textColor = cellStyle.timeFontColor
@@ -136,6 +149,7 @@ class WEPushTextTableViewCell: UITableViewCell {
             cellStyle.timeFont = customConfig.timeFont
             cellStyle.timeFontSize = customConfig.timeFontSize
             cellStyle.timeFontColor = customConfig.timeFontColor
+            cellStyle.timeFormat = customConfig.timeFormat
             
             cellStyle.readButtonImage = customConfig.readButtonImage
             cellStyle.readButtonImageTintColor = customConfig.readButtonImageTintColor
