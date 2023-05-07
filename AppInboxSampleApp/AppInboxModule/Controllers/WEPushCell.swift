@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WENotificationInbox
 
 protocol WEViewControllerConfigurationProtocol{
     var navigationTitle:String {get set}
@@ -14,6 +15,12 @@ protocol WEViewControllerConfigurationProtocol{
     var optionMenuImage: UIImage {get set}
     var navigationBarColor : UIColor {get set}
     var navigationBarTintColor: UIColor {get set}
+}
+
+protocol WECustomCellProtocol{
+    var nibName: String {get set}
+    var cellReuseIdentifier : String {get set}
+    func setupcell(inboxData: WEInboxMessage, index: Int)
 }
 
 protocol WEPushCardConfigutationProtocol {
@@ -25,7 +32,7 @@ protocol WEPushCardConfigutationProtocol {
     var cardBackgroundColor: UIColor {get set}
 }
 
-protocol WEPushTextConfigurationProtocol {
+protocol WEPushTextConfigurationProtocol:WEPushCardConfigutationProtocol {
     var titleFont: String {get set}
     var titleFontSize: CGFloat {get set}
     var titleFontColor: UIColor {get set}
@@ -57,6 +64,8 @@ protocol WEPushBannerConfigurationProtocol: WEPushTextConfigurationProtocol  {
 protocol WEPushConfigurationProtocol: WEPushCardConfigutationProtocol,WEPushTextConfigurationProtocol,WEPushBannerConfigurationProtocol,WEViewControllerConfigurationProtocol {
     
 }
+
+
 
 class DefaultCellConfiguration: WEPushConfigurationProtocol{
     var timeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -123,3 +132,4 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
 
     var deleteButtonImageTintColor: UIColor = .red
 }
+

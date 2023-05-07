@@ -15,6 +15,7 @@ class WENotificationInboxViewController: UIViewController {
     var hasNextPage = false
     var networkResponse  = ""
     var customConfiguration: AnyObject?
+    var customCell: WECustomCellProtocol?
     var defaultConfiguration: WEPushConfigurationProtocol? = DefaultCellConfiguration()
     
     @IBOutlet weak var optionMenu: UIBarButtonItem!
@@ -33,11 +34,9 @@ class WENotificationInboxViewController: UIViewController {
         inboxTableView?.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
         loadAppInboxData()
         setupCustomConfiguration(customConfiguration: (customConfiguration as AnyObject))
-        self.view.backgroundColor = defaultConfiguration?.navigationBarColor
-        self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
-        self.navigationItem.title = defaultConfiguration?.navigationTitle
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: defaultConfiguration?.navigationTitleColor as Any]
-        optionMenu.image = defaultConfiguration?.optionMenuImage
+        if let customCell = customCell{
+            setupCustomCell(customCell: customCell)
+        }
         inboxTableView?.isHidden = true
     }
     @objc func callPullToRefresh() {
@@ -65,8 +64,11 @@ class WENotificationInboxViewController: UIViewController {
                 print("Bulk Delete...")
             }
         }
+        let action3 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        }
         alertController.addAction(action1)
         alertController.addAction(action2)
+        alertController.addAction(action3)
 
         present(alertController, animated: true, completion: nil)
     }
@@ -80,7 +82,16 @@ class WENotificationInboxViewController: UIViewController {
             defaultConfiguration?.navigationBarColor = customConfig.navigationBarColor
             defaultConfiguration?.navigationBarTintColor = customConfig.navigationBarTintColor
         }
+        self.view.backgroundColor = defaultConfiguration?.navigationBarColor
+        self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
+        self.navigationItem.title = defaultConfiguration?.navigationTitle
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: defaultConfiguration?.navigationTitleColor as Any]
+        optionMenu.image = defaultConfiguration?.optionMenuImage
         
+    }
+    
+    func setupCustomCell(customCell: WECustomCellProtocol){
+        inboxTableView?.register(UINib(nibName: customCell.nibName, bundle: nil), forCellReuseIdentifier: customCell.cellReuseIdentifier)
     }
     
     func updateList(list:[WEInboxMessage],reset:Bool = false){
@@ -130,33 +141,37 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
         let inboxData = listOfInboxData[indexPath.row]
         let pushTempleteData  = inboxData.message as? PushNotificationTemplateData
         let detailDictionary = pushTempleteData?.messageMap
-        if let layout = detailDictionary?["layoutType"] as? String{
-            if layout == "TEXT" {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? WEPushTextTableViewCell {
-                    cell.delegate = self
-                    let customCell = customConfiguration as AnyObject
-                    cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+        if (customCell != nil) {
+            if let customCell = customCell{
+                if let cell = tableView.dequeueReusableCell(withIdentifier: customCell.cellReuseIdentifier) as?  UITableViewCell & WECustomCellProtocol{
+                    cell.setupcell(inboxData: inboxData, index: indexPath.row)
                     return cell
                 }
             }
-            else if layout == "BANNER" {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushBannerCell") as? WEPushBannerTableViewCell {
-                    cell.delegate = self
-                    let customCell = customConfiguration as AnyObject
-                    cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                    return cell
-                }
-            } else {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell") as? WEPushTextTableViewCell {
-                    cell.delegate = self
-                    let customCell = customConfiguration as AnyObject 
-                    cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                    return cell
-                }
+        }else {
+            guard let layout = detailDictionary?["layoutType"] as? String else { return UITableViewCell() }
+
+            switch layout {
+            case "TEXT":
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell", for: indexPath) as? WEPushTextTableViewCell else { return UITableViewCell() }
+                cell.delegate = self
+                let customCell = customConfiguration as AnyObject
+                cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+                return cell
+            case "BANNER":
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushBannerCell", for: indexPath) as? WEPushBannerTableViewCell else { return UITableViewCell() }
+                cell.delegate = self
+                let customCell = customConfiguration as AnyObject
+                cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+                return cell
+            default:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell", for: indexPath) as? WEPushTextTableViewCell else { return UITableViewCell() }
+                cell.delegate = self
+                let customCell = customConfiguration as AnyObject
+                cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+                return cell
             }
-            
-        }
-       
+            }
         return UITableViewCell()
     }
     
