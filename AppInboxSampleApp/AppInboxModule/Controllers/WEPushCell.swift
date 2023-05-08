@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import UIKit
 import WENotificationInbox
+
+// MARK: - Protocols
 
 protocol WEViewControllerConfigurationProtocol{
     var navigationTitle:String {get set}
@@ -65,7 +68,241 @@ protocol WEPushConfigurationProtocol: WEPushCardConfigutationProtocol,WEPushText
     
 }
 
+// MARK: - Extensions
 
+extension WEViewControllerConfigurationProtocol {
+    var navigationTitle: String {
+        get {
+            return "Notification-Inbox"
+        }
+        set {}
+    }
+    
+    var navigationTitleColor: UIColor {
+        get {
+            return .black
+        }
+        set {}
+    }
+    
+    var optionMenuItems: [String] {
+        get {
+            return ["Read All","Bulk Delete"]
+        }
+        set {}
+    }
+    
+    var optionMenuImage: UIImage {
+        get {
+            return UIImage(systemName: "ellipsis.circle")!
+        }
+        set {}
+    }
+    
+    var navigationBarColor: UIColor {
+        get {
+            return .white
+        }
+        set {}
+    }
+    
+    var navigationBarTintColor: UIColor {
+        get {
+           return .blue
+        }
+        set {}
+    }
+}
+
+extension WEPushCardConfigutationProtocol{
+
+    var cornerRadius: CGFloat {
+        get {
+            return 6.0
+        }
+        set {}
+    }
+    
+    var shadowColor : UIColor {
+        get {
+            return .gray
+        }
+        set {}
+    }
+    var shadow0ffSetWidth : Int {
+        get {
+            return 0
+        }
+        set {}
+    }
+
+    var shadow0ffSetHeight : Int {
+        get {
+            return 1
+        }
+        set {}
+    }
+    var shadowOpacity : Float {
+    get {
+        return 0.3
+    }
+    set {}
+}
+
+    var cardBackgroundColor: UIColor {
+        get {
+            return .white
+        }
+        set {}
+    }
+}
+
+extension WEPushTextConfigurationProtocol{
+    var titleFont: String {
+        get {
+            return ""
+        }
+        set {}
+    }
+
+    var titleFontSize: CGFloat {
+        get {
+            return 16
+        }
+        set {}
+    }
+
+    var titleFontColor: UIColor {
+        get {
+            return .black
+        }
+        set {}
+    }
+
+    var descriptionFont: String {
+        get {
+            return ""
+        }
+        set {}
+    }
+
+    var descriptionFontSize: CGFloat {
+        get {
+            return 14
+        }
+        set {}
+    }
+
+    var descriptionFontColor: UIColor {
+        get {
+            return .black
+        }
+        set {}
+    }
+
+    var timeFont: String {
+        get {
+            return ""
+        }
+        set {}
+    }
+
+    var timeFontSize: CGFloat {
+        get {
+            return 14
+        }
+        set {}
+    }
+
+    var timeFontColor: UIColor {
+        get {
+            return .tintColor
+        }
+        set {}
+    }
+
+    var timeFormat: String {
+        get {
+            return "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        }
+        set {}
+    }
+
+    var readButtonImage: UIImage {
+        get {
+            return UIImage(systemName: "envelope.open")!
+        }
+        set {}
+    }
+
+    var readButtonImageTintColor: UIColor {
+        get {
+            return .tintColor
+        }
+        set {}
+    }
+
+    var unReadButtonImage: UIImage {
+        get {
+            return UIImage(systemName: "envelope")!
+        }
+        set {}
+    }
+
+    var unReadButtonImageTintColor: UIColor {
+        get {
+            return .orange
+        }
+        set {}
+    }
+
+    var deleteButtonImage: UIImage {
+        get {
+            return UIImage(systemName: "trash")!
+        }
+        set {}
+    }
+
+    var deleteButtonImageTintColor: UIColor {
+        get {
+            return .red
+        }
+        set {}
+    }
+
+    var readUnreadButtonVisibility: Bool {
+        get {
+            return true
+        }
+        set {}
+    }
+
+    var deleteButtonVisibility: Bool {
+        get {
+            return true
+        }
+        set {}
+    }
+}
+
+extension WEPushBannerConfigurationProtocol{
+    var imageViewCornerRadius: CGFloat {
+        get {
+            return 6.0
+        }
+        set {}
+    }
+    
+    var imageViewContentMode: UIView.ContentMode {
+        get {
+            return .scaleAspectFill
+        }
+        set {}
+    }
+}
+
+
+// MARK: - Default Class
 
 class DefaultCellConfiguration: WEPushConfigurationProtocol{
     var timeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
