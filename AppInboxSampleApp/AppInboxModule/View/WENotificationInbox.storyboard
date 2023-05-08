@@ -61,11 +61,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Notification-Inbox" id="2zs-MG-sU7">
                         <barButtonItem key="backBarButtonItem" title=" " id="DEx-WS-ybd"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis.circle" catalog="system" id="EDu-2P-6g7">
-                            <connections>
-                                <action selector="optionMenuButtonClicked:" destination="Y6W-OH-hqX" id="mQ2-so-cIL"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis.circle" catalog="system" id="EDu-2P-6g7"/>
                     </navigationItem>
                     <connections>
                         <outlet property="inboxTableView" destination="Get-zj-QtB" id="W7l-Gx-UGb"/>

@@ -22,6 +22,11 @@ class WENotificationInboxViewController: UIViewController {
     @IBOutlet weak var inboxTableView: UITableView?
     
     @IBOutlet weak var noNotificationsView: UIView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: defaultConfiguration?.optionMenuImage, primaryAction: nil, menu: menuItems())
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         inboxTableView?.delegate = self
@@ -44,34 +49,28 @@ class WENotificationInboxViewController: UIViewController {
         loadAppInboxData()
     }
     
-    @IBAction func optionMenuButtonClicked(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-
-        let action1 = UIAlertAction(title: defaultConfiguration?.optionMenuItems[0], style: .default) { (_) in
-            WENotificationInbox.shared.markStatus(self.listOfInboxData, status: .READ)
-                for inboxData in self.listOfInboxData{
-                    inboxData.status = "READ"
-                }
-                self.inboxTableView?.reloadData()
-        }
-
-        let action2 = UIAlertAction(title: defaultConfiguration?.optionMenuItems[1], style: .default) { (_) in
-            for inboxData in self.listOfInboxData {
-//                inboxData.markDelete()
-                self.listOfInboxData = []
-                self.inboxTableView?.reloadData()
-                self.inboxTableView?.isHidden = true
+    func menuItems() -> UIMenu {
+        let addMenuItems = UIMenu(title: "",options: .displayInline, children: [
+            UIAction (title: defaultConfiguration?.optionMenuItems[0] ?? "Read All") { (_) in
+                WENotificationInbox.shared.markStatus(self.listOfInboxData, status: .READ)
+                    for inboxData in self.listOfInboxData{
+                        inboxData.status = "READ"
+                    }
+                    self.inboxTableView?.reloadData()
+            },
+            UIAction (title: defaultConfiguration?.optionMenuItems[1] ?? "Bulk Delete") { (_) in
+                for inboxData in self.listOfInboxData {
+                //                inboxData.markDelete()
+                            }
                 print("Bulk Delete...")
+                self.listOfInboxData = []
+                self.inboxTableView?.isHidden = true
+                self.inboxTableView?.reloadData()
             }
-        }
-        let action3 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-        }
-        alertController.addAction(action1)
-        alertController.addAction(action2)
-        alertController.addAction(action3)
-
-        present(alertController, animated: true, completion: nil)
+        ])
+        return addMenuItems
     }
+    
     func setupCustomConfiguration(customConfiguration: AnyObject){
         
         if let customConfig = customConfiguration as? WEViewControllerConfigurationProtocol{
