@@ -42,7 +42,6 @@ class WENotificationInboxViewController: UIViewController {
         if let customCell = customCell{
             setupCustomCell(customCell: customCell)
         }
-        inboxTableView?.isHidden = true
     }
     @objc func callPullToRefresh() {
         updateList(list: [],reset: true)
@@ -81,11 +80,15 @@ class WENotificationInboxViewController: UIViewController {
             defaultConfiguration?.navigationBarColor = customConfig.navigationBarColor
             defaultConfiguration?.navigationBarTintColor = customConfig.navigationBarTintColor
         }
+        if let customCongig = customConfiguration as? WENotificationInboxViewController{
+            customCongig.addAction(inboxTableView: inboxTableView!)
+        }
         self.view.backgroundColor = defaultConfiguration?.navigationBarColor
         self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
         self.navigationItem.title = defaultConfiguration?.navigationTitle
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: defaultConfiguration?.navigationTitleColor as Any]
         optionMenu.image = defaultConfiguration?.optionMenuImage
+        self.inboxTableView?.backgroundColor = .white
         
     }
     
@@ -121,6 +124,7 @@ class WENotificationInboxViewController: UIViewController {
             }
         })
     }
+    public func addAction(inboxTableView: UITableView){}
 }
 
 extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDataSource {
@@ -133,9 +137,7 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listOfInboxData.count
     }
-    
-    
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let inboxData = listOfInboxData[indexPath.row]
         let pushTempleteData  = inboxData.message as? PushNotificationTemplateData
@@ -213,10 +215,4 @@ extension WENotificationInboxViewController: InboxCellDelegate {
         }
     }
 }
-protocol InboxCellDelegate: NSObject {
-    func readEvent(_: WEInboxMessage?)
-    func unreadEvent(_: WEInboxMessage?)
-    func viewEvent(_: WEInboxMessage?)
-    func clickEvent(_: WEInboxMessage?)
-    func deleteEvent(_: WEInboxMessage?, sender: Any)
-}
+

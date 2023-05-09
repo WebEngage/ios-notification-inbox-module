@@ -11,6 +11,14 @@ import WENotificationInbox
 
 // MARK: - Protocols
 
+protocol InboxCellDelegate: NSObject {
+    func readEvent(_: WEInboxMessage?)
+    func unreadEvent(_: WEInboxMessage?)
+    func viewEvent(_: WEInboxMessage?)
+    func clickEvent(_: WEInboxMessage?)
+    func deleteEvent(_: WEInboxMessage?, sender: Any)
+}
+
 protocol WEViewControllerConfigurationProtocol{
     var navigationTitle:String {get set}
     var navigationTitleColor: UIColor {get set}
@@ -39,11 +47,11 @@ protocol WEPushTextConfigurationProtocol:WEPushCardConfigutationProtocol {
     var titleFont: String {get set}
     var titleFontSize: CGFloat {get set}
     var titleFontColor: UIColor {get set}
-
+    
     var descriptionFont: String {get set}
     var descriptionFontSize: CGFloat {get set}
     var descriptionFontColor: UIColor {get set}
-
+    
     var timeFont: String {get set}
     var timeFontSize: CGFloat {get set}
     var timeFontColor: UIColor {get set}
@@ -108,14 +116,14 @@ extension WEViewControllerConfigurationProtocol {
     
     var navigationBarTintColor: UIColor {
         get {
-           return .blue
+            return .blue
         }
         set {}
     }
 }
 
 extension WEPushCardConfigutationProtocol{
-
+    
     var cornerRadius: CGFloat {
         get {
             return 6.0
@@ -135,7 +143,7 @@ extension WEPushCardConfigutationProtocol{
         }
         set {}
     }
-
+    
     var shadow0ffSetHeight : Int {
         get {
             return 1
@@ -143,18 +151,20 @@ extension WEPushCardConfigutationProtocol{
         set {}
     }
     var shadowOpacity : Float {
-    get {
-        return 0.3
+        get {
+            return 0.3
+        }
+        set {}
     }
-    set {}
-}
-
+    
     var cardBackgroundColor: UIColor {
         get {
             return .white
         }
         set {}
     }
+    
+    
 }
 
 extension WEPushTextConfigurationProtocol{
@@ -164,119 +174,119 @@ extension WEPushTextConfigurationProtocol{
         }
         set {}
     }
-
+    
     var titleFontSize: CGFloat {
         get {
             return 16
         }
         set {}
     }
-
+    
     var titleFontColor: UIColor {
         get {
             return .black
         }
         set {}
     }
-
+    
     var descriptionFont: String {
         get {
             return ""
         }
         set {}
     }
-
+    
     var descriptionFontSize: CGFloat {
         get {
             return 14
         }
         set {}
     }
-
+    
     var descriptionFontColor: UIColor {
         get {
             return .black
         }
         set {}
     }
-
+    
     var timeFont: String {
         get {
             return ""
         }
         set {}
     }
-
+    
     var timeFontSize: CGFloat {
         get {
             return 14
         }
         set {}
     }
-
+    
     var timeFontColor: UIColor {
         get {
-            return .tintColor
+            return .black
         }
         set {}
     }
-
+    
     var timeFormat: String {
         get {
             return "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         }
         set {}
     }
-
+    
     var readButtonImage: UIImage {
         get {
             return UIImage(systemName: "envelope.open")!
         }
         set {}
     }
-
+    
     var readButtonImageTintColor: UIColor {
         get {
             return .tintColor
         }
         set {}
     }
-
+    
     var unReadButtonImage: UIImage {
         get {
             return UIImage(systemName: "envelope")!
         }
         set {}
     }
-
+    
     var unReadButtonImageTintColor: UIColor {
         get {
             return .orange
         }
         set {}
     }
-
+    
     var deleteButtonImage: UIImage {
         get {
             return UIImage(systemName: "trash")!
         }
         set {}
     }
-
+    
     var deleteButtonImageTintColor: UIColor {
         get {
             return .red
         }
         set {}
     }
-
+    
     var readUnreadButtonVisibility: Bool {
         get {
             return true
         }
         set {}
     }
-
+    
     var deleteButtonVisibility: Bool {
         get {
             return true
@@ -305,6 +315,7 @@ extension WEPushBannerConfigurationProtocol{
 // MARK: - Default Class
 
 class DefaultCellConfiguration: WEPushConfigurationProtocol{
+    
     var timeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     
     var navigationTitleColor: UIColor = .black
@@ -328,45 +339,45 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     var imageViewCornerRadius: CGFloat = 6
     
     var titleFontColor: UIColor = .black
-
+    
     var descriptionFontColor: UIColor = .black
-
-    var timeFontColor: UIColor = .tintColor
-
+    
+    var timeFontColor: UIColor = .black
+    
     var titleFont: String = ""
-
+    
     var descriptionFont: String = ""
-
+    
     var timeFont: String = ""
-
+    
     var titleFontSize: CGFloat = 16
-
+    
     var descriptionFontSize: CGFloat = 14
-
+    
     var timeFontSize: CGFloat = 14
-
+    
     var cornerRadius: CGFloat = 6
-
+    
     var shadowColor: UIColor = .gray
-
+    
     var shadow0ffSetWidth: Int = 0
-
+    
     var shadow0ffSetHeight: Int = 1
-
+    
     var shadowOpacity: Float = 0.3
-
+    
     var cardBackgroundColor: UIColor = .white
     // TODO - Remove Forced Unwrapping
     var readButtonImage: UIImage = UIImage(systemName: "envelope.open")!
-
+    
     var readButtonImageTintColor: UIColor = .tintColor
     // TODO - Remove Forced Unwrapping
     var unReadButtonImage: UIImage = UIImage(systemName: "envelope")!
-
+    
     var unReadButtonImageTintColor: UIColor = .orange
     // TODO - Remove Forced Unwrapping
     var deleteButtonImage: UIImage = UIImage(systemName: "trash")!
-
+    
     var deleteButtonImageTintColor: UIColor = .red
 }
 

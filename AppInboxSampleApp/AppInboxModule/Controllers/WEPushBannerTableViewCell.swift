@@ -83,9 +83,10 @@ class WEPushBannerTableViewCell: UITableViewCell {
                 }
                 if cellStyle.timeFont != "" {
                     self.timeLabel.font = UIFont(name: cellStyle.timeFont, size: 12)
-                    self.timeLabel.textColor = cellStyle.timeFontColor
+                    
                 }
                 // TODO - Fix FontSize
+                self.timeLabel.textColor = cellStyle.timeFontColor
                 self.timeLabel.font = UIFont.systemFont(ofSize: 14)
             }
             
@@ -137,6 +138,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
             self.notificationImageView.layer.cornerRadius = self.cellStyle.imageViewCornerRadius
             self.notificationImageView.image = nil
             self.notificationImageView.contentMode = cellStyle.imageViewContentMode
+            self.contentView.backgroundColor = .init(white: 1.0, alpha: 0.9)
         }
     }
     
@@ -206,3 +208,4 @@ class WEPushBannerTableViewCell: UITableViewCell {
         delegate?.deleteEvent(datasource, sender: sender)
     }
 }
+
