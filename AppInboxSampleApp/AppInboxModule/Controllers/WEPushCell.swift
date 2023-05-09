@@ -9,6 +9,15 @@ import Foundation
 import UIKit
 import WENotificationInbox
 
+// MARK: - Enums
+
+enum cellType: String {
+    case text = "TEXT"
+    case banner = "BANNER"
+    case rating = "RATING"
+    case carousel = "CAROUSEL"
+}
+
 // MARK: - Protocols
 
 protocol InboxCellDelegate: NSObject {
@@ -29,9 +38,9 @@ protocol WEViewControllerConfigurationProtocol{
 }
 
 protocol WECustomCellProtocol{
-    var nibName: String {get set}
-    var cellReuseIdentifier : String {get set}
-    func setupcell(inboxData: WEInboxMessage, index: Int)
+    var customNibName: String {get set}
+    var cellReuseIdentifier : cellType {get set}
+    func setupcell(inboxData: AnyObject, index: Int)
 }
 
 protocol WEPushCardConfigutationProtocol {

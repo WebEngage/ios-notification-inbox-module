@@ -15,7 +15,7 @@ class WENotificationInboxViewController: UIViewController {
     var hasNextPage = false
     var networkResponse  = ""
     var customConfiguration: AnyObject?
-    var customCell: WECustomCellProtocol?
+    var customCells: [WECustomCellProtocol]? = []
     var defaultConfiguration: WEPushConfigurationProtocol? = DefaultCellConfiguration()
     
     @IBOutlet weak var optionMenu: UIBarButtonItem!
@@ -39,15 +39,17 @@ class WENotificationInboxViewController: UIViewController {
         inboxTableView?.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
         loadAppInboxData()
         setupCustomConfiguration(customConfiguration: (customConfiguration as AnyObject))
-        if let customCell = customCell{
-            setupCustomCell(customCell: customCell)
+        if let customCells = customCells{
+            for customCell in customCells {
+                registerCustomCell(customCell: customCell)
+            }
         }
     }
     @objc func callPullToRefresh() {
         updateList(list: [],reset: true)
         loadAppInboxData()
     }
-    
+
     func menuItems() -> UIMenu {
         let addMenuItems = UIMenu(title: "",options: .displayInline, children: [
             UIAction (title: defaultConfiguration?.optionMenuItems[0] ?? "Read All") { (_) in
@@ -80,9 +82,9 @@ class WENotificationInboxViewController: UIViewController {
             defaultConfiguration?.navigationBarColor = customConfig.navigationBarColor
             defaultConfiguration?.navigationBarTintColor = customConfig.navigationBarTintColor
         }
-        if let customCongig = customConfiguration as? WENotificationInboxViewController{
-            customCongig.addAction(inboxTableView: inboxTableView!)
-        }
+//        if let customCongig = customConfiguration as? WENotificationInboxViewController{
+//            customCongig.addAction(inboxTableView: inboxTableView!)
+//        }
         self.view.backgroundColor = defaultConfiguration?.navigationBarColor
         self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
         self.navigationItem.title = defaultConfiguration?.navigationTitle
@@ -92,8 +94,10 @@ class WENotificationInboxViewController: UIViewController {
         
     }
     
-    func setupCustomCell(customCell: WECustomCellProtocol){
-        inboxTableView?.register(UINib(nibName: customCell.nibName, bundle: nil), forCellReuseIdentifier: customCell.cellReuseIdentifier)
+    public func registerCustomCell(customCell: WECustomCellProtocol){
+        if customCell.customNibName != ""{
+            inboxTableView?.register(UINib(nibName: customCell.customNibName, bundle: nil), forCellReuseIdentifier: customCell.cellReuseIdentifier.rawValue)
+        }
     }
     
     func updateList(list:[WEInboxMessage],reset:Bool = false){
@@ -124,7 +128,29 @@ class WENotificationInboxViewController: UIViewController {
             }
         })
     }
-    public func addAction(inboxTableView: UITableView){}
+//    public func addAction(inboxTableView: UITableView){}
+    func renderWECells(_ tableView: UITableView, layout: String, cellForRowAt indexPath: IndexPath, inboxData: WEInboxMessage )-> UITableViewCell{
+        switch layout {
+        case "TEXT":
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell", for: indexPath) as? WEPushTextTableViewCell else { return UITableViewCell() }
+            cell.delegate = self
+            let customCell = customConfiguration as AnyObject
+            cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+            return cell
+        case "BANNER":
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushBannerCell", for: indexPath) as? WEPushBannerTableViewCell else { return UITableViewCell() }
+            cell.delegate = self
+            let customCell = customConfiguration as AnyObject
+            cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+            return cell
+        default:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell", for: indexPath) as? WEPushTextTableViewCell else { return UITableViewCell() }
+            cell.delegate = self
+            let customCell = customConfiguration as AnyObject
+            cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
+            return cell
+        }
+    }
 }
 
 extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDataSource {
@@ -142,36 +168,19 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
         let inboxData = listOfInboxData[indexPath.row]
         let pushTempleteData  = inboxData.message as? PushNotificationTemplateData
         let detailDictionary = pushTempleteData?.messageMap
-        if (customCell != nil) {
-            if let customCell = customCell{
-                if let cell = tableView.dequeueReusableCell(withIdentifier: customCell.cellReuseIdentifier) as?  UITableViewCell & WECustomCellProtocol{
-                    cell.setupcell(inboxData: inboxData, index: indexPath.row)
-                    return cell
+        guard let layout = detailDictionary?["layoutType"] as? String else { return UITableViewCell() }
+        if let customCells = customCells{
+            for customCell in customCells{
+                if (customCell.cellReuseIdentifier.rawValue == layout){
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: customCell.cellReuseIdentifier.rawValue) as?  UITableViewCell & WECustomCellProtocol{
+                        cell.setupcell(inboxData: inboxData, index: indexPath.row)
+                        return cell
+                    }
                 }
             }
+            return renderWECells(tableView, layout: layout, cellForRowAt: indexPath, inboxData: inboxData)
         }else {
-            guard let layout = detailDictionary?["layoutType"] as? String else { return UITableViewCell() }
-
-            switch layout {
-            case "TEXT":
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell", for: indexPath) as? WEPushTextTableViewCell else { return UITableViewCell() }
-                cell.delegate = self
-                let customCell = customConfiguration as AnyObject
-                cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                return cell
-            case "BANNER":
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushBannerCell", for: indexPath) as? WEPushBannerTableViewCell else { return UITableViewCell() }
-                cell.delegate = self
-                let customCell = customConfiguration as AnyObject
-                cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                return cell
-            default:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell", for: indexPath) as? WEPushTextTableViewCell else { return UITableViewCell() }
-                cell.delegate = self
-                let customCell = customConfiguration as AnyObject
-                cell.setupCell(inboxData: inboxData, index: indexPath.row, cellConfiguration: customCell)
-                return cell
-            }
+            return renderWECells(tableView, layout: layout, cellForRowAt: indexPath, inboxData: inboxData)
             }
         return UITableViewCell()
     }
@@ -215,4 +224,3 @@ extension WENotificationInboxViewController: InboxCellDelegate {
         }
     }
 }
-
