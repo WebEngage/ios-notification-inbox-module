@@ -30,6 +30,7 @@ class WENotificationInboxViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.register(UINib(nibName: "WEPushBannerTableViewCell", bundle: nil), forCellReuseIdentifier: "PushBannerCell")
@@ -40,6 +41,7 @@ class WENotificationInboxViewController: UIViewController {
         tableView?.refreshControl?.addTarget(self, action: #selector(callPullToRefresh), for: .valueChanged)
         tableView?.refreshControl?.beginRefreshing()
         loadAppInboxData()
+        
     }
     @objc func callPullToRefresh() {
         updateList(list: [],reset: true)
@@ -69,7 +71,6 @@ class WENotificationInboxViewController: UIViewController {
     }
     
     func setupCustomConfiguration(customConfiguration: AnyObject, forCellType config  : customConfig){
-        
         switch config {
         case customConfig.text:
             customTextConfiguration = customConfiguration
@@ -90,13 +91,16 @@ class WENotificationInboxViewController: UIViewController {
     //        if let customCongig = customConfiguration as? WENotificationInboxViewController{
     //            customCongig.addAction(inboxTableView: inboxTableView!)
     //        }
-            self.view.backgroundColor = defaultConfiguration?.navigationBarColor
-            self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
-            self.navigationItem.title = defaultConfiguration?.navigationTitle
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: defaultConfiguration?.navigationTitleColor as Any]
-            optionMenu.image = defaultConfiguration?.optionMenuImage
-            self.tableView?.backgroundColor = defaultConfiguration?.backgroundColor
         }
+    }
+    
+    func setupView() {
+        self.view.backgroundColor = defaultConfiguration?.navigationBarColor
+        self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
+        self.navigationItem.title = defaultConfiguration?.navigationTitle
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: defaultConfiguration?.navigationTitleColor as Any]
+        optionMenu.image = defaultConfiguration?.optionMenuImage
+        self.tableView?.backgroundColor = defaultConfiguration?.backgroundColor
     }
     
     func updateList(list:[WEInboxMessage],reset:Bool = false){
@@ -121,6 +125,10 @@ class WENotificationInboxViewController: UIViewController {
                 self.hasNextPage = response.hasNextPage
             }else if let weInboxError = error{
                 WELogger.d("Error: \(weInboxError)")
+                DispatchQueue.main.async {
+//                    self.noNotificationsView.isHidden = false
+                    
+                }
             }
             DispatchQueue.main.async {
                 self.tableView?.refreshControl?.endRefreshing()
