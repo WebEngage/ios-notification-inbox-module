@@ -18,6 +18,12 @@ enum cellType: String {
     case carousel = "CAROUSEL"
 }
 
+enum customConfig{
+    case text
+    case banner
+    case viewController
+}
+
 // MARK: - Protocols
 
 protocol InboxCellDelegate: NSObject {
@@ -35,10 +41,10 @@ protocol WEViewControllerConfigurationProtocol{
     var optionMenuImage: UIImage {get set}
     var navigationBarColor : UIColor {get set}
     var navigationBarTintColor: UIColor {get set}
+    var backgroundColor: UIColor {get set}
 }
 
 protocol WECustomCellProtocol{
-    var customNibName: String {get set}
     var cellReuseIdentifier : cellType {get set}
     func setupcell(inboxData: AnyObject, index: Int)
 }
@@ -129,13 +135,19 @@ extension WEViewControllerConfigurationProtocol {
         }
         set {}
     }
+    var backgroundColor: UIColor {
+        get {
+            return .init(white: 0.9, alpha: 1.0)
+        }
+        set {}
+    }
 }
 
 extension WEPushCardConfigutationProtocol{
     
     var cornerRadius: CGFloat {
         get {
-            return 6.0
+            return 6.0  
         }
         set {}
     }

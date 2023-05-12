@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -64,9 +63,9 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis.circle" catalog="system" id="EDu-2P-6g7"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="inboxTableView" destination="Get-zj-QtB" id="W7l-Gx-UGb"/>
                         <outlet property="noNotificationsView" destination="WXh-uq-eSX" id="Zmv-UP-XQf"/>
                         <outlet property="optionMenu" destination="EDu-2P-6g7" id="RiQ-lG-Jyn"/>
+                        <outlet property="tableView" destination="Get-zj-QtB" id="W7l-Gx-UGb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
