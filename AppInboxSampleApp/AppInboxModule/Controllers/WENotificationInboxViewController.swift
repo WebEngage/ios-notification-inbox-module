@@ -28,6 +28,7 @@ class WENotificationInboxViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: defaultConfiguration?.optionMenuImage, primaryAction: nil, menu: menuItems())
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -44,13 +45,6 @@ class WENotificationInboxViewController: UIViewController {
         
     }
     
-    deinit {
-        tableView?.delegate = nil
-        tableView?.dataSource = nil
-        tableView = nil
-        listOfInboxData = []
-    }
-    
     @objc func callPullToRefresh() {
         updateList(list: [],reset: true)
         loadAppInboxData()
@@ -58,14 +52,14 @@ class WENotificationInboxViewController: UIViewController {
 
     private func menuItems() -> UIMenu {
         let addMenuItems = UIMenu(title: "",options: .displayInline, children: [
-            UIAction (title: defaultConfiguration?.optionMenuItems[0] ?? "Read All") { (_) in
+            UIAction (title: defaultConfiguration?.optionMenuTitles[0] ?? "Read All") { (_) in
                 WENotificationInbox.shared.markStatus(self.listOfInboxData, status: .READ)
                     for inboxData in self.listOfInboxData{
                         inboxData.status = "READ"
                     }
                     self.tableView?.reloadData()
             },
-            UIAction (title: defaultConfiguration?.optionMenuItems[1] ?? "Bulk Delete") { (_) in
+            UIAction (title: defaultConfiguration?.optionMenuTitles[1] ?? "Bulk Delete") { (_) in
                 for inboxData in self.listOfInboxData {
                 //                inboxData.markDelete()
                             }
@@ -91,7 +85,7 @@ class WENotificationInboxViewController: UIViewController {
                 defaultConfiguration?.navigationTitle = customConfig.navigationTitle
                 defaultConfiguration?.noNotificationsView = customConfig.noNotificationsView
                 defaultConfiguration?.navigationTitleColor = customConfig.navigationTitleColor
-                defaultConfiguration?.optionMenuItems = customConfig.optionMenuItems
+                defaultConfiguration?.optionMenuTitles = customConfig.optionMenuTitles
                 defaultConfiguration?.optionMenuImage = customConfig.optionMenuImage
                 defaultConfiguration?.navigationBarColor = customConfig.navigationBarColor
                 defaultConfiguration?.navigationBarTintColor = customConfig.navigationBarTintColor
@@ -210,8 +204,7 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
             return renderWECells(tableView, layout: layout, cellForRowAt: indexPath, inboxData: inboxData)
         }else {
             return renderWECells(tableView, layout: layout, cellForRowAt: indexPath, inboxData: inboxData)
-            }
-        return UITableViewCell()
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

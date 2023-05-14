@@ -35,14 +35,14 @@ protocol InboxCellDelegate: NSObject {
 }
 
 protocol WEViewControllerConfigurationProtocol{
-    var navigationTitle:String {get set}
-    var navigationTitleColor: UIColor {get set}
-    var optionMenuItems: [String] {get set}
-    var optionMenuImage: UIImage {get set}
-    var navigationBarColor : UIColor {get set}
-    var navigationBarTintColor: UIColor {get set}
     var backgroundColor: UIColor {get set}
+    var navigationBarColor: UIColor {get set}
+    var navigationBarTintColor: UIColor {get set}
+    var navigationTitle: String {get set}
+    var navigationTitleColor: UIColor {get set}
     var noNotificationsView: UIView {get set}
+    var optionMenuImage: UIImage {get set}
+    var optionMenuTitles: [String] {get set}
 }
 
 protocol WECustomCellProtocol{
@@ -51,12 +51,12 @@ protocol WECustomCellProtocol{
 }
 
 protocol WEPushCardConfigutationProtocol {
+    var backgroundColor: UIColor {get set}
     var cornerRadius: CGFloat {get set}
     var shadowColor : UIColor {get set}
     var shadow0ffSetWidth : Int {get set}
     var shadow0ffSetHeight : Int {get set}
     var shadowOpacity : Float {get set}
-    var cardBackgroundColor: UIColor {get set}
 }
 
 protocol WEPushTextConfigurationProtocol:WEPushCardConfigutationProtocol {
@@ -75,10 +75,13 @@ protocol WEPushTextConfigurationProtocol:WEPushCardConfigutationProtocol {
     
     var readButtonImage: UIImage {get set}
     var readButtonImageTintColor: UIColor {get set}
+    
     var unReadButtonImage: UIImage {get set}
     var unReadButtonImageTintColor: UIColor {get set}
+    
     var deleteButtonImage: UIImage {get set}
     var deleteButtonImageTintColor: UIColor {get set}
+    
     var readUnreadButtonVisibility: Bool {get set}
     var deleteButtonVisibility: Bool {get set}
 }
@@ -117,7 +120,7 @@ extension WEViewControllerConfigurationProtocol {
         set {}
     }
     
-    var optionMenuItems: [String] {
+    var optionMenuTitles: [String] {
         get {
             return ["Read All","Bulk Delete"]
         }
@@ -187,7 +190,7 @@ extension WEPushCardConfigutationProtocol{
         set {}
     }
     
-    var cardBackgroundColor: UIColor {
+    var backgroundColor: UIColor {
         get {
             return .white
         }
@@ -360,7 +363,7 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
     var navigationTitle: String = "Notification-Inbox"
     
-    var optionMenuItems: [String] = ["Read All", "Bulk Delete"]
+    var optionMenuTitles: [String] = ["Read All", "Bulk Delete"]
     
     var imageViewContentMode: UIView.ContentMode = .scaleAspectFill
     
@@ -396,7 +399,7 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
     var shadowOpacity: Float = 0.3
     
-    var cardBackgroundColor: UIColor = .white
+    var backgroundColor: UIColor = .white
     // TODO - Remove Forced Unwrapping
     var readButtonImage: UIImage = UIImage(systemName: "envelope.open")!
     
