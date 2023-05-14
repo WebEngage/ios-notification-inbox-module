@@ -52,14 +52,14 @@ class WENotificationInboxViewController: UIViewController {
 
     private func menuItems() -> UIMenu {
         let addMenuItems = UIMenu(title: "",options: .displayInline, children: [
-            UIAction (title: defaultConfiguration?.optionMenuTitles[0] ?? "Read All") { (_) in
+            UIAction (title: defaultConfiguration?.optionMenuTitles[0] ?? "Read All") { [unowned self] (_) in
                 WENotificationInbox.shared.markStatus(self.listOfInboxData, status: .READ)
                     for inboxData in self.listOfInboxData{
                         inboxData.status = "READ"
                     }
                     self.tableView?.reloadData()
             },
-            UIAction (title: defaultConfiguration?.optionMenuTitles[1] ?? "Bulk Delete") { (_) in
+            UIAction (title: defaultConfiguration?.optionMenuTitles[1] ?? "Bulk Delete") {[unowned self](_) in
                 for inboxData in self.listOfInboxData {
                 //                inboxData.markDelete()
                             }
@@ -129,15 +129,15 @@ class WENotificationInboxViewController: UIViewController {
     
     private func loadAppInboxData(lastInboxData : WEInboxMessage? = nil, shouldResetAllList:Bool = false){
         WENotificationInbox.shared.getNotificationList(lastInboxData: lastInboxData,
-                                                       completion: { data, error in
+                                                       completion: { [weak self] data, error in
             if let response = data{
-                self.updateList(list: response.messageList,reset: shouldResetAllList)
-                self.hasNextPage = response.hasNextPage
+                self?.updateList(list: response.messageList,reset: shouldResetAllList)
+                self?.hasNextPage = response.hasNextPage
             }else if let weInboxError = error{
                 WELogger.d("Error: \(weInboxError)")
             }
             DispatchQueue.main.async {
-                self.tableView?.refreshControl?.endRefreshing()
+                self?.tableView?.refreshControl?.endRefreshing()
             }
         })
     }
