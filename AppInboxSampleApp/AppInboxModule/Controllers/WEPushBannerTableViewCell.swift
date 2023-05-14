@@ -108,11 +108,10 @@ class WEPushBannerTableViewCell: UITableViewCell {
             
             if let notificationImage = pushMessage.image {
                 if let imageURL = URL(string: notificationImage){
-                    
-                    URLSession.shared.dataTask(with: imageURL) { data, response, error in
+                    URLSession.shared.dataTask(with: imageURL) { [weak self] data, response, error in
+                        guard let self = self else { return }
                         guard let data = data, error == nil else { return }
                         DispatchQueue.main.async { // execute on main thread
-                           
                             self.notificationImageView.image = UIImage(data: data)
                         }
                     }.resume()
