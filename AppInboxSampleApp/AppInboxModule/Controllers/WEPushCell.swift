@@ -380,11 +380,11 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
     var timeFont: String = ""
     
-    var titleFontSize: CGFloat = 16
+    var titleFontSize: CGFloat = 0
     
-    var descriptionFontSize: CGFloat = 14
+    var descriptionFontSize: CGFloat = 0
     
-    var timeFontSize: CGFloat = 14
+    var timeFontSize: CGFloat = 0
     
     var cornerRadius: CGFloat = 6
     

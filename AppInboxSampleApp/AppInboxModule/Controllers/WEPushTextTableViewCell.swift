@@ -41,31 +41,31 @@ class WEPushTextTableViewCell: UITableViewCell {
         datasource = inboxData
         setupCustomConfiguration(customConfiguration: cellConfiguration)
         
-//        self.customConfiguration = cellConfiguration
-//        self.cellStyle = cellConfiguration
-        
         if let pushMessage = datasource?.message as? PushNotificationTemplateData{
             if let title = pushMessage.title {
                 self.titleLabel.attributedText = WEUtils.getAttributedString(rawString: title)
-                if cellStyle.titleFont != ""{
-                    self.titleLabel.font = UIFont(name: cellStyle.titleFont, size: cellStyle.titleFontSize)
-                    self.titleLabel.textColor = cellStyle.titleFontColor
+                var font: UIFont?
+                if cellStyle.titleFont != "" {
+                    font = UIFont(name: cellStyle.titleFont, size: 16)
                 }
-                
-                //
-                // TODO - Fix FontSize
-                self.titleLabel.font = UIFont.systemFont(ofSize: 16)
-                self.titleLabel.font = UIFont.systemFont(ofSize: 16)
+                if cellStyle.titleFontSize != 0 {
+                    font = UIFont(name: cellStyle.titleFont, size: cellStyle.titleFontSize)
+                }
+                self.titleLabel.font = font
+                self.titleLabel.textColor = cellStyle.titleFontColor
             }
             
             if let description = pushMessage.body{
                 self.descriptionLabel.attributedText = WEUtils.getAttributedString(rawString: description)
+                var font: UIFont?
                 if cellStyle.descriptionFont != "" {
-                    self.descriptionLabel.font = UIFont(name: cellStyle.descriptionFont, size: cellStyle.descriptionFontSize)
-                    //                self.descriptionLabel.textColor = cellStyle.descriptionFontColor
+                    font = UIFont(name: cellStyle.descriptionFont, size: 14)
                 }
-                // TODO - Fix FontSize
-                self.descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+                if cellStyle.descriptionFontSize != 0 {
+                    font = UIFont(name: cellStyle.descriptionFont, size: cellStyle.descriptionFontSize)
+                }
+                self.descriptionLabel.font = font
+                self.descriptionLabel.textColor = cellStyle.descriptionFontColor
             }
             
             if let notificationTime = datasource?.creationTime{
@@ -82,12 +82,15 @@ class WEPushTextTableViewCell: UITableViewCell {
                         self.timeLabel.text = formattedDate.description
                     }
                 }
+                var font: UIFont?
                 if cellStyle.timeFont != "" {
-                    self.timeLabel.font = UIFont(name: cellStyle.timeFont, size: 12)
+                    font = UIFont(name: cellStyle.timeFont, size: 14)
                 }
-                // TODO - Fix FontSize
-                self.timeLabel.textColor = cellStyle.timeFontColor
-                self.timeLabel.font = UIFont.systemFont(ofSize: 14)
+                if cellStyle.timeFontSize != 0 {
+                    font = UIFont(name: cellStyle.timeFont, size: cellStyle.timeFontSize)
+                }
+                self.timeLabel.font = font
+                self.timeLabel.textColor = cellStyle.descriptionFontColor
             }
         }
         if !(cellStyle.readUnreadButtonVisibility) {
