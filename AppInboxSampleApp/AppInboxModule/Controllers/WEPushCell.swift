@@ -42,6 +42,7 @@ protocol WEViewControllerConfigurationProtocol{
     var navigationBarColor : UIColor {get set}
     var navigationBarTintColor: UIColor {get set}
     var backgroundColor: UIColor {get set}
+    var noNotificationsView: UIView {get set}
 }
 
 protocol WECustomCellProtocol{
@@ -92,6 +93,14 @@ protocol WEPushConfigurationProtocol: WEPushCardConfigutationProtocol,WEPushText
 }
 
 // MARK: - Extensions
+extension WECustomCellProtocol{
+    var cellReuseIdentifier: cellType{
+        get{
+            return .text
+        }
+        set {}
+    }
+}
 
 extension WEViewControllerConfigurationProtocol {
     var navigationTitle: String {
@@ -137,7 +146,7 @@ extension WEViewControllerConfigurationProtocol {
     }
     var backgroundColor: UIColor {
         get {
-            return .init(white: 0.9, alpha: 1.0)
+            return .init(white: 1, alpha: 0.9)
         }
         set {}
     }
@@ -337,6 +346,8 @@ extension WEPushBannerConfigurationProtocol{
 
 class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
+    var noNotificationsView: UIView = UIView()
+    
     var timeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     
     var navigationTitleColor: UIColor = .black
@@ -356,8 +367,6 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     var readUnreadButtonVisibility: Bool = true
     
     var deleteButtonVisibility: Bool = true
-    
-    var imageViewCornerRadius: CGFloat = 6
     
     var titleFontColor: UIColor = .black
     
@@ -400,5 +409,7 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     var deleteButtonImage: UIImage = UIImage(systemName: "trash")!
     
     var deleteButtonImageTintColor: UIColor = .red
+    
+    var imageViewCornerRadius: CGFloat = 6.0
 }
 

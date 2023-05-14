@@ -14,10 +14,10 @@ class WENotificationInboxViewController: UIViewController {
     var listOfInboxData = [WEInboxMessage]()
     var hasNextPage = false
     var networkResponse  = ""
-    var customTextConfiguration: AnyObject?
-    var customBannerConfiguration: AnyObject?
-    var customCells: [WECustomCellProtocol]? = []
-    var defaultConfiguration: WEPushConfigurationProtocol? = DefaultCellConfiguration()
+    private var customTextConfiguration: AnyObject?
+    private var customBannerConfiguration: AnyObject?
+    private var customCells: [WECustomCellProtocol]? = []
+    private var defaultConfiguration: WEPushConfigurationProtocol? = DefaultCellConfiguration()
     
     @IBOutlet weak var optionMenu: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView?
@@ -43,12 +43,20 @@ class WENotificationInboxViewController: UIViewController {
         loadAppInboxData()
         
     }
+    
+    deinit {
+        tableView?.delegate = nil
+        tableView?.dataSource = nil
+        tableView = nil
+        listOfInboxData = []
+    }
+    
     @objc func callPullToRefresh() {
         updateList(list: [],reset: true)
         loadAppInboxData()
     }
 
-    func menuItems() -> UIMenu {
+    private func menuItems() -> UIMenu {
         let addMenuItems = UIMenu(title: "",options: .displayInline, children: [
             UIAction (title: defaultConfiguration?.optionMenuItems[0] ?? "Read All") { (_) in
                 WENotificationInbox.shared.markStatus(self.listOfInboxData, status: .READ)
@@ -63,14 +71,14 @@ class WENotificationInboxViewController: UIViewController {
                             }
                 print("Bulk Delete...")
                 self.listOfInboxData = []
-                self.tableView?.isHidden = true
+                self.tableView?.backgroundView?.isHidden = false
                 self.tableView?.reloadData()
             }
         ])
         return addMenuItems
     }
     
-    func setupCustomConfiguration(customConfiguration: AnyObject, forCellType config  : customConfig){
+    func setupCustomConfiguration(customConfiguration: AnyObject, for config  : customConfig){
         switch config {
         case customConfig.text:
             customTextConfiguration = customConfiguration
@@ -81,6 +89,7 @@ class WENotificationInboxViewController: UIViewController {
         case customConfig.viewController:
             if let customConfig = customConfiguration as? WEViewControllerConfigurationProtocol{
                 defaultConfiguration?.navigationTitle = customConfig.navigationTitle
+                defaultConfiguration?.noNotificationsView = customConfig.noNotificationsView
                 defaultConfiguration?.navigationTitleColor = customConfig.navigationTitleColor
                 defaultConfiguration?.optionMenuItems = customConfig.optionMenuItems
                 defaultConfiguration?.optionMenuImage = customConfig.optionMenuImage
@@ -88,22 +97,30 @@ class WENotificationInboxViewController: UIViewController {
                 defaultConfiguration?.navigationBarTintColor = customConfig.navigationBarTintColor
                 defaultConfiguration?.backgroundColor = customConfig.backgroundColor
             }
-    //        if let customCongig = customConfiguration as? WENotificationInboxViewController{
-    //            customCongig.addAction(inboxTableView: inboxTableView!)
-    //        }
         }
     }
     
-    func setupView() {
+    func setupCustomCell(customCell: WECustomCellProtocol, forCellType cellType  : cellType){
+        var usersCell = customCell
+        usersCell.cellReuseIdentifier = cellType
+        customCells?.append(usersCell)
+    }
+    
+    private func setupView() {
+        defaultConfiguration?.noNotificationsView = noNotificationsView
+        self.tableView?.addSubview(defaultConfiguration?.noNotificationsView ?? noNotificationsView)
+        self.tableView?.backgroundView = defaultConfiguration?.noNotificationsView
+        self.tableView?.backgroundView?.isHidden = true
         self.view.backgroundColor = defaultConfiguration?.navigationBarColor
         self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
         self.navigationItem.title = defaultConfiguration?.navigationTitle
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: defaultConfiguration?.navigationTitleColor as Any]
         optionMenu.image = defaultConfiguration?.optionMenuImage
         self.tableView?.backgroundColor = defaultConfiguration?.backgroundColor
+      
     }
     
-    func updateList(list:[WEInboxMessage],reset:Bool = false){
+    private func updateList(list:[WEInboxMessage],reset:Bool = false){
         if(hasNextPage && !reset){
             self.listOfInboxData += list
         }else{
@@ -111,13 +128,12 @@ class WENotificationInboxViewController: UIViewController {
         }
         
         DispatchQueue.main.async {
-            self.tableView?.isHidden = false
             self.tableView?.refreshControl?.endRefreshing()
             self.tableView?.reloadData()
         }
     }
     
-    func loadAppInboxData(lastInboxData : WEInboxMessage? = nil, shouldResetAllList:Bool = false){
+    private func loadAppInboxData(lastInboxData : WEInboxMessage? = nil, shouldResetAllList:Bool = false){
         WENotificationInbox.shared.getNotificationList(lastInboxData: lastInboxData,
                                                        completion: { data, error in
             if let response = data{
@@ -125,18 +141,14 @@ class WENotificationInboxViewController: UIViewController {
                 self.hasNextPage = response.hasNextPage
             }else if let weInboxError = error{
                 WELogger.d("Error: \(weInboxError)")
-                DispatchQueue.main.async {
-//                    self.noNotificationsView.isHidden = false
-                    
-                }
             }
             DispatchQueue.main.async {
                 self.tableView?.refreshControl?.endRefreshing()
             }
         })
     }
-//    public func addAction(inboxTableView: UITableView){}
-    func renderWECells(_ tableView: UITableView, layout: String, cellForRowAt indexPath: IndexPath, inboxData: WEInboxMessage )-> UITableViewCell{
+    
+    private func renderWECells(_ tableView: UITableView, layout: String, cellForRowAt indexPath: IndexPath, inboxData: WEInboxMessage )-> UITableViewCell{
         switch layout {
         case "TEXT":
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PushTextCell", for: indexPath) as? WEPushTextTableViewCell else { return UITableViewCell() }
@@ -171,7 +183,14 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listOfInboxData.count
+        if listOfInboxData.isEmpty {
+            tableView.backgroundView?.isHidden = false
+            return 0
+        } else {
+            tableView.backgroundView?.isHidden = true
+            tableView.isHidden = false
+            return listOfInboxData.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

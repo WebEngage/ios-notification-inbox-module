@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,6 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Get-zj-QtB">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXh-uq-eSX" userLabel="NoNotificationView">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <subviews>
@@ -31,21 +36,13 @@
                                         <color key="textColor" red="0.33725491169999999" green="0.54901963470000004" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Get-zj-QtB">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="715"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="NYn-Rl-lhK" firstAttribute="top" secondItem="lMh-zQ-Nin" secondAttribute="bottom" constant="7" id="7N9-Pw-xho"/>
-                                    <constraint firstItem="Get-zj-QtB" firstAttribute="top" secondItem="WXh-uq-eSX" secondAttribute="top" id="HeV-6e-jKI"/>
                                     <constraint firstItem="NYn-Rl-lhK" firstAttribute="centerX" secondItem="WXh-uq-eSX" secondAttribute="centerX" id="Sed-vj-HBq"/>
                                     <constraint firstItem="lMh-zQ-Nin" firstAttribute="centerX" secondItem="WXh-uq-eSX" secondAttribute="centerX" id="b9M-HE-E9U"/>
-                                    <constraint firstItem="Get-zj-QtB" firstAttribute="leading" secondItem="WXh-uq-eSX" secondAttribute="leading" id="hHa-hj-YG5"/>
                                     <constraint firstItem="lMh-zQ-Nin" firstAttribute="top" secondItem="WXh-uq-eSX" secondAttribute="top" constant="240" id="qyv-mf-hOl"/>
-                                    <constraint firstAttribute="bottom" secondItem="Get-zj-QtB" secondAttribute="bottom" id="vQ1-hl-D5J"/>
-                                    <constraint firstAttribute="trailing" secondItem="Get-zj-QtB" secondAttribute="trailing" id="zVU-TU-m8Y"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -55,7 +52,12 @@
                             <constraint firstItem="WXh-uq-eSX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4Mf-Bk-ac3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="WXh-uq-eSX" secondAttribute="bottom" id="Fe3-xO-Uag"/>
                             <constraint firstItem="WXh-uq-eSX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="KVM-eJ-tUk"/>
+                            <constraint firstItem="Get-zj-QtB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="UQR-Fb-ncF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Get-zj-QtB" secondAttribute="bottom" id="XgG-OR-uAW"/>
+                            <constraint firstItem="Get-zj-QtB" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="gnP-wj-FJe"/>
+                            <constraint firstItem="Get-zj-QtB" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="gwA-dE-2Mz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WXh-uq-eSX" secondAttribute="trailing" id="nUi-nT-HYD"/>
+                            <constraint firstItem="Get-zj-QtB" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="vON-62-PIh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Notification-Inbox" id="2zs-MG-sU7">

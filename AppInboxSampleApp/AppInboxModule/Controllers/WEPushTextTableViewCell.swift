@@ -23,7 +23,7 @@ class WEPushTextTableViewCell: UITableViewCell {
     @IBOutlet weak var cardView: UIView!
     
     weak var delegate: InboxCellDelegate?
-    var datasource: WEInboxMessage?
+    weak var datasource: WEInboxMessage?
     var cellStyle = DefaultCellConfiguration()
     var customConfiguration: WEPushConfigurationProtocol?
     
@@ -55,6 +55,7 @@ class WEPushTextTableViewCell: UITableViewCell {
                 //
                 // TODO - Fix FontSize
                 self.titleLabel.font = UIFont.systemFont(ofSize: 16)
+                self.titleLabel.font = UIFont.systemFont(ofSize: 16)
             }
             
             if let description = pushMessage.body{
@@ -80,11 +81,9 @@ class WEPushTextTableViewCell: UITableViewCell {
                         let formattedDate = dateFormatter.string(from: date)
                         self.timeLabel.text = formattedDate.description
                     }
-                    
                 }
                 if cellStyle.timeFont != "" {
                     self.timeLabel.font = UIFont(name: cellStyle.timeFont, size: 12)
-//
                 }
                 // TODO - Fix FontSize
                 self.timeLabel.textColor = cellStyle.timeFontColor
@@ -162,11 +161,6 @@ class WEPushTextTableViewCell: UITableViewCell {
             cellStyle.deleteButtonImageTintColor = customConfig.deleteButtonImageTintColor
             cellStyle.readUnreadButtonVisibility = customConfig.readUnreadButtonVisibility
             cellStyle.deleteButtonVisibility = customConfig.deleteButtonVisibility
-        }
-        
-        if let customConfig =  customConfiguration as? WEPushBannerConfigurationProtocol{
-            cellStyle.imageViewCornerRadius = customConfig.imageViewCornerRadius
-            cellStyle.imageViewContentMode = customConfig.imageViewContentMode
         }
     }
 

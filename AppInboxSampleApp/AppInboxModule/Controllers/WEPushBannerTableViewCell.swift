@@ -151,6 +151,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
             cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
             cellStyle.shadowOpacity = customConfig.shadowOpacity
             cellStyle.cardBackgroundColor = customConfig.cardBackgroundColor
+            cellStyle.imageViewCornerRadius = customConfig.cornerRadius
         }
         
         if let customConfig =  customConfiguration as? WEPushTextConfigurationProtocol{
