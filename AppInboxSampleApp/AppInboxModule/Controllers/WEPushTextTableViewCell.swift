@@ -44,27 +44,33 @@ class WEPushTextTableViewCell: UITableViewCell {
         if let pushMessage = datasource?.message as? PushNotificationTemplateData{
             if let title = pushMessage.title {
                 self.titleLabel.attributedText = WEUtils.getAttributedString(rawString: title)
+                self.titleLabel.font = UIFont.systemFont(ofSize: cellStyle.titleFontSize)
                 var font: UIFont?
                 if cellStyle.titleFont != "" {
                     font = UIFont(name: cellStyle.titleFont, size: 16)
                 }
-                if cellStyle.titleFontSize != 0 {
+                if cellStyle.titleFontSize != 16 {
                     font = UIFont(name: cellStyle.titleFont, size: cellStyle.titleFontSize)
                 }
-                self.titleLabel.font = font
+                if font != nil {
+                    self.titleLabel.font = font
+                }
                 self.titleLabel.textColor = cellStyle.titleFontColor
             }
             
             if let description = pushMessage.body{
                 self.descriptionLabel.attributedText = WEUtils.getAttributedString(rawString: description)
+                self.descriptionLabel.font = UIFont.systemFont(ofSize: cellStyle.descriptionFontSize)
                 var font: UIFont?
                 if cellStyle.descriptionFont != "" {
                     font = UIFont(name: cellStyle.descriptionFont, size: 14)
                 }
-                if cellStyle.descriptionFontSize != 0 {
+                if cellStyle.descriptionFontSize != 14 {
                     font = UIFont(name: cellStyle.descriptionFont, size: cellStyle.descriptionFontSize)
                 }
-                self.descriptionLabel.font = font
+                if font != nil{
+                    self.descriptionLabel.font = font
+                }
                 self.descriptionLabel.textColor = cellStyle.descriptionFontColor
             }
             
@@ -86,11 +92,13 @@ class WEPushTextTableViewCell: UITableViewCell {
                 if cellStyle.timeFont != "" {
                     font = UIFont(name: cellStyle.timeFont, size: 14)
                 }
-                if cellStyle.timeFontSize != 0 {
+                if cellStyle.timeFontSize != 14 {
                     font = UIFont(name: cellStyle.timeFont, size: cellStyle.timeFontSize)
                 }
-                self.timeLabel.font = font
-                self.timeLabel.textColor = cellStyle.descriptionFontColor
+                if font != nil{
+                    self.timeLabel.font = font
+                }
+                self.timeLabel.textColor = cellStyle.timeFontColor
             }
         }
         if !(cellStyle.readUnreadButtonVisibility) {

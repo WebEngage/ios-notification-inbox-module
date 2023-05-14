@@ -372,7 +372,7 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
     var descriptionFontColor: UIColor = .black
     
-    var timeFontColor: UIColor = .black
+    var timeFontColor: UIColor = .tintColor
     
     var titleFont: String = ""
     
@@ -380,11 +380,11 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
     var timeFont: String = ""
     
-    var titleFontSize: CGFloat = 0
+    var titleFontSize: CGFloat = 16
     
-    var descriptionFontSize: CGFloat = 0
+    var descriptionFontSize: CGFloat = 14
     
-    var timeFontSize: CGFloat = 0
+    var timeFontSize: CGFloat = 14
     
     var cornerRadius: CGFloat = 6
     
