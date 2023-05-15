@@ -72,7 +72,7 @@ class WENotificationInboxViewController: UIViewController {
         return addMenuItems
     }
     
-    func setupCustomConfiguration(customConfiguration: AnyObject, for config  : customConfig){
+    func setupCustomConfiguration(customConfiguration: AnyObject, customizationFor config  : customConfig){
         switch config {
         case customConfig.text:
             customTextConfiguration = customConfiguration
