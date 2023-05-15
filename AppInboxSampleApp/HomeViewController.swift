@@ -43,11 +43,24 @@ class HomeViewController: UIViewController {
     @IBAction func notificationButtonClick(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "WENotificationInbox", bundle: nil)
         let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "WENotificationInbox") as! WENotificationInboxViewController
-        
-       
+//        inboxViewController.setupCustomConfiguration(customConfiguration: custom(), for: .text)
+//
         self.navigationController?.pushViewController(inboxViewController, animated: true)
     }
     
+//    class custom:WEPushTextConfigurationProtocol {
+//        var titleFont: String = "AcademyEngravedLetPlain"
+//        var titleFontColor: UIColor = .red
+//        var titleFontSize: CGFloat = 16
+//        var descriptionFont: String = "ArialRoundedMTBold"
+//        var descriptionFontColor: UIColor = .blue
+//        var descriptionFontSize: CGFloat = 14
+//        var timeFont: String = "AcademyEngravedLetPlain"
+//        var timeFontSize: CGFloat = 12
+//        var timeFontColor: UIColor = .gray
+//        var timeFormat: String = "MM-dd-yyyy HH:mm"
+//    }
+
     private func performLogin() {
 
         let alert = UIAlertController(title: "Login", message: nil, preferredStyle: .alert)
@@ -62,7 +75,7 @@ class HomeViewController: UIViewController {
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
 
-        alert.addAction(UIAlertAction(title: "Login", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Login", style: .default, handler: { [weak self](_) in
 
             let loginID = alert.textFields![0].text!
             let token = alert.textFields![1].text!
@@ -73,14 +86,14 @@ class HomeViewController: UIViewController {
 
             UserDefaults.standard.set(loginID, forKey: Constants.login)
 
-            self.setLeftBarButton()
+            self?.setLeftBarButton()
 
             let confirmAlert = UIAlertController(title: "Login Success", message: "You are logged in now with ID: \(loginID)",
                 preferredStyle: .alert)
 
             confirmAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
 
-            self.present(confirmAlert, animated: true, completion: nil)
+            self?.present(confirmAlert, animated: true, completion: nil)
         }))
 
         self.present(alert, animated: true, completion: nil)
@@ -93,11 +106,11 @@ class HomeViewController: UIViewController {
             let alert = UIAlertController.init(title: "Logout: \(loginID)", message: nil, preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: { (_) in
+            alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: {[weak self] (_) in
 
                 WebEngage.sharedInstance()?.user.logout()
                 UserDefaults.standard.removeObject(forKey: Constants.login)
-                self.setLeftBarButton()
+                self?.setLeftBarButton()
             }))
 
             self.present(alert, animated: true, completion: nil)
@@ -121,11 +134,11 @@ class HomeViewController: UIViewController {
     }
     
     private func getCount(){
-        WENotificationInbox.shared.getUserNotificationCount {  data, error   in
+        WENotificationInbox.shared.getUserNotificationCount { [weak self] data, error   in
             if data != nil{
-                self.badgeCount = "\(String(describing: data))"
+                self?.badgeCount = data as? String
                 DispatchQueue.main.async {
-                    self.showBadge(withCount: self.badgeCount ?? "")
+                    self?.showBadge(withCount: self?.badgeCount ?? "")
                 }
             }else if let weInboxError = error{
                 WELogger.d("\(weInboxError.status) \(weInboxError.code) \(weInboxError.localizedDescription)")
@@ -168,6 +181,3 @@ class HomeViewController: UIViewController {
     }
 }
 
-class CustomConfiguration {
-  
-}
