@@ -134,12 +134,12 @@ class WEPushBannerTableViewCell: UITableViewCell {
                         let image = cellStyle.unReadButtonImage
                         self.readUnreadButton.setImage(image, for: .normal)
                         self.readUnreadButton.tintColor = cellStyle.unReadButtonImageTintColor
-                        self.cardView.backgroundColor = cellStyle.backgroundColor.withAlphaComponent(0.6)
+                        self.cardView.backgroundColor = cellStyle.cardBackgroundColor.withAlphaComponent(0.6)
                     } else if status == "READ" {
                         let image = cellStyle.readButtonImage
                         self.readUnreadButton.setImage(image, for: .normal)
                         self.readUnreadButton.tintColor = cellStyle.readButtonImageTintColor
-                        self.cardView.backgroundColor = cellStyle.backgroundColor.withAlphaComponent(1)
+                        self.cardView.backgroundColor = cellStyle.cardBackgroundColor.withAlphaComponent(1)
                     }
                 }
             }
@@ -165,7 +165,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
             cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
             cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
             cellStyle.shadowOpacity = customConfig.shadowOpacity
-            cellStyle.backgroundColor = customConfig.backgroundColor
+            cellStyle.cardBackgroundColor = customConfig.cardBackgroundColor
             cellStyle.imageViewCornerRadius = customConfig.cornerRadius
         }
         
@@ -207,14 +207,14 @@ class WEPushBannerTableViewCell: UITableViewCell {
                     self.readUnreadButton.setImage(image, for: .normal)
                     self.readUnreadButton.tintColor = cellStyle.readButtonImageTintColor
                     self.datasource?.status = "READ"
-                    self.cardView.backgroundColor = cellStyle.backgroundColor.withAlphaComponent(1)
+                    self.cardView.backgroundColor = cellStyle.cardBackgroundColor.withAlphaComponent(1)
                 } else if datasource.status == "READ" {
                     delegate?.unreadEvent(datasource)
                     let image = cellStyle.unReadButtonImage
                     self.readUnreadButton.setImage(image, for: .normal)
                     self.readUnreadButton.tintColor = cellStyle.unReadButtonImageTintColor
                     self.datasource?.status = "UNREAD"
-                    self.cardView.backgroundColor = cellStyle.backgroundColor.withAlphaComponent(0.6)
+                    self.cardView.backgroundColor = cellStyle.cardBackgroundColor.withAlphaComponent(0.6)
                 }
             }
         }

@@ -51,7 +51,7 @@ protocol WECustomCellProtocol{
 }
 
 protocol WEPushCardConfigutationProtocol {
-    var backgroundColor: UIColor {get set}
+    var cardBackgroundColor: UIColor {get set}
     var cornerRadius: CGFloat {get set}
     var shadowColor : UIColor {get set}
     var shadow0ffSetWidth : Int {get set}
@@ -190,7 +190,7 @@ extension WEPushCardConfigutationProtocol{
         set {}
     }
     
-    var backgroundColor: UIColor {
+    var cardBackgroundColor: UIColor {
         get {
             return .white
         }
@@ -367,6 +367,8 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
     var imageViewContentMode: UIView.ContentMode = .scaleAspectFill
     
+    var backgroundColor: UIColor = .init(white: 1, alpha: 0.9)
+    
     var readUnreadButtonVisibility: Bool = true
     
     var deleteButtonVisibility: Bool = true
@@ -399,7 +401,7 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
     var shadowOpacity: Float = 0.3
     
-    var backgroundColor: UIColor = .white
+    var cardBackgroundColor: UIColor = .white
     // TODO - Remove Forced Unwrapping
     var readButtonImage: UIImage = UIImage(systemName: "envelope.open")!
     
