@@ -24,6 +24,12 @@ enum customConfig{
     case viewController
 }
 
+enum labelType{
+    case title
+    case description
+    case time
+}
+
 // MARK: - Protocols
 
 protocol InboxCellDelegate: NSObject {

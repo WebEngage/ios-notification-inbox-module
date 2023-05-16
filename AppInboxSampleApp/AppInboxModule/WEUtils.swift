@@ -9,7 +9,7 @@ import Foundation
 
 struct WEUtils{
     
-    static func getAttributedString(rawString: String, withSize size: CGFloat, withFont fontFamily: String, withColor color: UIColor) -> NSAttributedString {
+    static func getAttributedString(rawString: String,forLabelType: labelType, withSize size: CGFloat, withFont fontFamily: String, withColor color: UIColor) -> NSAttributedString {
         var text:NSAttributedString = NSAttributedString()
         var newFont: UIFont
         var newAttributes: [NSAttributedString.Key: Any]
@@ -22,12 +22,12 @@ struct WEUtils{
             }else{
                 newFont = font.withSize(size)
             }
-            if color != UIColor.black {
+            if (color != UIColor.black && forLabelType != .time) || (forLabelType == .time) {
                 newAttributes = [
                     .font: newFont,
                     .foregroundColor: color
                 ]
-            } else{
+            }else {
                 newAttributes = [NSAttributedString.Key.font: newFont]
             }
             let updatedText = NSMutableAttributedString(attributedString: attribStr)
@@ -52,5 +52,17 @@ struct WEUtils{
             }
         }
         return "\(notificationTime)"
+    }
+    
+    static func getTime(withFormat: String, forTime time: String) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        if let date = dateFormatter.date(from: time) {
+            dateFormatter.dateFormat = withFormat
+            let formattedDate = dateFormatter.string(from: date)
+            return formattedDate.description
+        }
+        return time
     }
 }

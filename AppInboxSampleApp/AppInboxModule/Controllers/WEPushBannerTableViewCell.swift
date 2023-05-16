@@ -33,7 +33,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -45,35 +45,23 @@ class WEPushBannerTableViewCell: UITableViewCell {
         if let pushMessage = datasource?.message as? PushNotificationTemplateData{
             
             if let title = pushMessage.title {
-                let attributedTitle = WEUtils.getAttributedString(rawString: title, withSize: cellStyle.titleFontSize, withFont: cellStyle.titleFont, withColor: cellStyle.titleFontColor)
+                let attributedTitle = WEUtils.getAttributedString(rawString: title, forLabelType: .title, withSize: cellStyle.titleFontSize, withFont: cellStyle.titleFont, withColor: cellStyle.titleFontColor)
                 self.titleLabel.attributedText = attributedTitle
             }
+            
             if let description = pushMessage.body{
-                self.descriptionLabel.attributedText = WEUtils.getAttributedString(rawString: description, withSize: cellStyle.descriptionFontSize, withFont: cellStyle.descriptionFont, withColor: cellStyle.descriptionFontColor)
+                self.descriptionLabel.attributedText = WEUtils.getAttributedString(rawString: description, forLabelType: .description, withSize: cellStyle.descriptionFontSize, withFont: cellStyle.descriptionFont, withColor: cellStyle.descriptionFontColor)
             }
             
             if let notificationTime = datasource?.creationTime{
-                
-                if cellStyle.timeFormat == "" {
-                    self.timeLabel.text = "\(WEUtils.getTimeAgo(notificationTime: notificationTime)) ago."
+                var time: String
+                if cellStyle.timeFormat.isEmpty {
+                    time = "\(WEUtils.getTimeAgo(notificationTime: notificationTime)) ago."
                 }else{
-                    
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                    if let date = dateFormatter.date(from: notificationTime) {
-                        dateFormatter.dateFormat = cellStyle.timeFormat
-                        let formattedDate = dateFormatter.string(from: date)
-                        self.timeLabel.text = formattedDate.description
-                    }
+                    let timeFormat = cellStyle.timeFormat
+                    time = WEUtils.getTime(withFormat: timeFormat, forTime: notificationTime)
                 }
-                var font: UIFont?
-                if cellStyle.timeFont != "" {
-                    font = UIFont(name:cellStyle.timeFont , size: cellStyle.timeFontSize)
-                }else{
-                    font = UIFont.systemFont(ofSize: cellStyle.timeFontSize)
-                }
-                self.timeLabel.font = font
-                self.timeLabel.textColor = cellStyle.timeFontColor
+                self.timeLabel.attributedText = WEUtils.getAttributedString(rawString: time, forLabelType: .time, withSize: cellStyle.timeFontSize, withFont: cellStyle.timeFont, withColor: cellStyle.timeFontColor)
             }
             
             if let notificationImage = pushMessage.image {
