@@ -40,7 +40,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
     
     func setupCell(inboxData: WEInboxMessage, index: Int, cellConfiguration: AnyObject) {
         datasource = inboxData
-        setupCustomConfiguration(customConfiguration: cellConfiguration)
+        cellStyle = WEUtils.setupCustomConfiguration(customConfiguration: cellConfiguration, cellStyle: cellStyle)
         
         if let pushMessage = datasource?.message as? PushNotificationTemplateData{
             
@@ -112,47 +112,6 @@ class WEPushBannerTableViewCell: UITableViewCell {
             self.notificationImageView.image = nil
             self.notificationImageView.contentMode = cellStyle.imageViewContentMode
             self.contentView.backgroundColor = .init(white: 1.0, alpha: 0.9)
-        }
-    }
-    
-    func setupCustomConfiguration(customConfiguration: AnyObject){
-        
-        if let customConfig = customConfiguration as? WEPushCardConfigutationProtocol{
-            cellStyle.cornerRadius = customConfig.cornerRadius
-            cellStyle.shadowColor = customConfig.shadowColor
-            cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
-            cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
-            cellStyle.shadowOpacity = customConfig.shadowOpacity
-            cellStyle.cardBackgroundColor = customConfig.cardBackgroundColor
-            cellStyle.imageViewCornerRadius = customConfig.cornerRadius
-        }
-        
-        if let customConfig =  customConfiguration as? WEPushTextConfigurationProtocol{
-            cellStyle.titleFont = customConfig.titleFont
-            cellStyle.titleFontSize = customConfig.titleFontSize
-            cellStyle.titleFontColor = customConfig.titleFontColor
-            cellStyle.descriptionFont = customConfig.descriptionFont
-            cellStyle.descriptionFontSize = customConfig.descriptionFontSize
-            cellStyle.descriptionFontColor = customConfig.descriptionFontColor
-            
-            cellStyle.timeFont = customConfig.timeFont
-            cellStyle.timeFontSize = customConfig.timeFontSize
-            cellStyle.timeFontColor = customConfig.timeFontColor
-            cellStyle.timeFormat = customConfig.timeFormat
-            
-            cellStyle.readButtonImage = customConfig.readButtonImage
-            cellStyle.readButtonImageTintColor = customConfig.readButtonImageTintColor
-            cellStyle.unReadButtonImage = customConfig.unReadButtonImage
-            cellStyle.unReadButtonImageTintColor = customConfig.unReadButtonImageTintColor
-            cellStyle.deleteButtonImage = customConfig.deleteButtonImage
-            cellStyle.deleteButtonImageTintColor = customConfig.deleteButtonImageTintColor
-            cellStyle.readUnreadButtonVisibility = customConfig.readUnreadButtonVisibility
-            cellStyle.deleteButtonVisibility = customConfig.deleteButtonVisibility
-        }
-        
-        if let customConfig =  customConfiguration as? WEPushBannerConfigurationProtocol{
-            cellStyle.imageViewCornerRadius = customConfig.imageViewCornerRadius
-            cellStyle.imageViewContentMode = customConfig.imageViewContentMode
         }
     }
     
