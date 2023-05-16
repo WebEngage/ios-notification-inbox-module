@@ -43,45 +43,18 @@ class WEPushBannerTableViewCell: UITableViewCell {
         setupCustomConfiguration(customConfiguration: cellConfiguration)
         
         if let pushMessage = datasource?.message as? PushNotificationTemplateData{
-            if let title = pushMessage.title {
-                self.titleLabel.attributedText = WEUtils.getAttributedString(rawString: title)
-                self.titleLabel.font = UIFont.systemFont(ofSize: cellStyle.titleFontSize)
-                var font: UIFont?
-                if cellStyle.titleFont != "" {
-                    font = UIFont(name: cellStyle.titleFont, size: 16)
-                }
-                if cellStyle.titleFontSize != 16 {
-                    font = UIFont(name: cellStyle.titleFont, size: cellStyle.titleFontSize)
-                }
-                if cellStyle.titleFontColor != .black {
-                    self.titleLabel.textColor = cellStyle.titleFontColor
-                }
-                if font != nil {
-                    self.titleLabel.font = font
-                }
-            }
             
+            if let title = pushMessage.title {
+                let attributedTitle = WEUtils.getAttributedString(rawString: title, withSize: cellStyle.titleFontSize, withFont: cellStyle.titleFont, withColor: cellStyle.titleFontColor)
+                self.titleLabel.attributedText = attributedTitle
+            }
             if let description = pushMessage.body{
-                self.descriptionLabel.attributedText = WEUtils.getAttributedString(rawString: description)
-                self.descriptionLabel.font = UIFont.systemFont(ofSize: cellStyle.descriptionFontSize)
-                var font: UIFont?
-                if cellStyle.descriptionFont != "" {
-                    font = UIFont(name: cellStyle.descriptionFont, size: 14)
-                }
-                if cellStyle.descriptionFontSize != 14 {
-                    font = UIFont(name: cellStyle.descriptionFont, size: cellStyle.descriptionFontSize)
-                }
-                if cellStyle.descriptionFontColor != .black {
-                    self.descriptionLabel.textColor = cellStyle.descriptionFontColor
-                }
-                if font != nil{
-                    self.descriptionLabel.font = font
-                }
+                self.descriptionLabel.attributedText = WEUtils.getAttributedString(rawString: description, withSize: cellStyle.descriptionFontSize, withFont: cellStyle.descriptionFont, withColor: cellStyle.descriptionFontColor)
             }
             
             if let notificationTime = datasource?.creationTime{
                 
-                if cellStyle.timeFormat == "yyyy-MM-dd'T'HH:mm:ss.SSSZ" {
+                if cellStyle.timeFormat == "" {
                     self.timeLabel.text = "\(WEUtils.getTimeAgo(notificationTime: notificationTime)) ago."
                 }else{
                     
@@ -95,14 +68,11 @@ class WEPushBannerTableViewCell: UITableViewCell {
                 }
                 var font: UIFont?
                 if cellStyle.timeFont != "" {
-                    font = UIFont(name: cellStyle.timeFont, size: 14)
+                    font = UIFont(name:cellStyle.timeFont , size: cellStyle.timeFontSize)
+                }else{
+                    font = UIFont.systemFont(ofSize: cellStyle.timeFontSize)
                 }
-                if cellStyle.timeFontSize != 14 {
-                    font = UIFont(name: cellStyle.timeFont, size: cellStyle.timeFontSize)
-                }
-                if font != nil{
-                    self.timeLabel.font = font
-                }
+                self.timeLabel.font = font
                 self.timeLabel.textColor = cellStyle.timeFontColor
             }
             

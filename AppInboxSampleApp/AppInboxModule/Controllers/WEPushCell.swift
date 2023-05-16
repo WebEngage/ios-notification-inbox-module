@@ -259,14 +259,14 @@ extension WEPushTextConfigurationProtocol{
     
     var timeFontColor: UIColor {
         get {
-            return .black
+            return .tintColor
         }
         set {}
     }
     
     var timeFormat: String {
         get {
-            return "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            return ""
         }
         set {}
     }
@@ -351,7 +351,7 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
     var noNotificationsView: UIView = UIView()
     
-    var timeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    var timeFormat: String = ""
     
     var navigationTitleColor: UIColor = .black
     
