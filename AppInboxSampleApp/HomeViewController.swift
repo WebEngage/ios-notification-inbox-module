@@ -27,6 +27,11 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setLeftBarButton()
+        self.showBadge(withCount: self.badgeCount ?? "")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if ((UserDefaults.standard.value(forKey: Constants.login) as? String) != nil) {
             getCount()
         }
@@ -43,23 +48,21 @@ class HomeViewController: UIViewController {
     @IBAction func notificationButtonClick(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "WENotificationInbox", bundle: nil)
         let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "WENotificationInbox") as! WENotificationInboxViewController
-//        inboxViewController.setupCustomConfiguration(customConfiguration: custom(), for: .text)
-//
+//        inboxViewController.setupCustomConfiguration(customConfiguration: CustomTextCard(), customizationFor: .text)
+        
         self.navigationController?.pushViewController(inboxViewController, animated: true)
     }
     
-//    class custom:WEPushTextConfigurationProtocol {
-//        var titleFont: String = "AcademyEngravedLetPlain"
-//        var titleFontColor: UIColor = .red
-//        var titleFontSize: CGFloat = 16
-//        var descriptionFont: String = "ArialRoundedMTBold"
-//        var descriptionFontColor: UIColor = .blue
-//        var descriptionFontSize: CGFloat = 14
-//        var timeFont: String = "AcademyEngravedLetPlain"
-//        var timeFontSize: CGFloat = 12
-//        var timeFontColor: UIColor = .gray
-//        var timeFormat: String = "MM-dd-yyyy HH:mm"
-//    }
+    class CustomTextCard: WEPushTextConfigurationProtocol{
+        var titleFontColor: UIColor = .systemPink
+        var titleFont: String = "AmericanTypewriter"
+        var titleFontSize: CGFloat = 16
+        var descriptionFontSize: CGFloat = 18
+        var timeFontColor: UIColor = .red
+        var timeFont: String = "AmericanTypewriter"
+        var timeFormat: String = "EEEE, MMM d, yyyy"
+        var timeFontSize: CGFloat = 19
+    }
 
     private func performLogin() {
 
@@ -138,7 +141,7 @@ class HomeViewController: UIViewController {
             if data != nil{
                 self?.badgeCount = data as? String
                 DispatchQueue.main.async {
-                    self?.showBadge(withCount: self?.badgeCount ?? "")
+                    self?.badgeCountLabel.text = self?.badgeCount
                 }
             }else if let weInboxError = error{
                 WELogger.d("\(weInboxError.status) \(weInboxError.code) \(weInboxError.localizedDescription)")
@@ -166,18 +169,16 @@ class HomeViewController: UIViewController {
     }
     
     private func showBadge(withCount count: String) {
-        if let badgeCount = self.badgeCount{
-            let badge = badgeLabel(withCount: badgeCount)
-            notificationButton.addSubview(badge)
+        let badge = badgeLabel(withCount: count)
+        notificationButton.addSubview(badge)
 
-            NSLayoutConstraint.activate([
-                badge.leftAnchor .constraint (equalTo: notificationButton.leftAnchor, constant: 22),
-                badge.topAnchor.constraint (equalTo: notificationButton.topAnchor, constant: -5),
-                badge.widthAnchor.constraint (equalToConstant: Constants.badgeSize),
-                badge.heightAnchor.constraint (equalToConstant: Constants.badgeSize),
-                                        ])
-            self.navigationItem.rightBarButtonItems?.append(UIBarButtonItem(customView:notificationButton))
-        }
+        NSLayoutConstraint.activate([
+            badge.leftAnchor .constraint (equalTo: notificationButton.leftAnchor, constant: 22),
+            badge.topAnchor.constraint (equalTo: notificationButton.topAnchor, constant: -5),
+            badge.widthAnchor.constraint (equalToConstant: Constants.badgeSize),
+            badge.heightAnchor.constraint (equalToConstant: Constants.badgeSize),
+                                    ])
+        self.navigationItem.rightBarButtonItems?.append(UIBarButtonItem(customView:notificationButton))
     }
 }
 
