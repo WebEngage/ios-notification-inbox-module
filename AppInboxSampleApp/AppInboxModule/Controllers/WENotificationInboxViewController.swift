@@ -18,6 +18,7 @@ class WENotificationInboxViewController: UIViewController {
     private var customBannerConfiguration: AnyObject?
     private var customCells: [WECustomCellProtocol]? = []
     private var defaultConfiguration: WEPushConfigurationProtocol? = DefaultCellConfiguration()
+    private var customNoNotifications: UIView?
     
     @IBOutlet weak var optionMenu: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView?
@@ -83,7 +84,7 @@ class WENotificationInboxViewController: UIViewController {
         case customConfig.viewController:
             if let customConfig = customConfiguration as? WEViewControllerConfigurationProtocol{
                 defaultConfiguration?.navigationTitle = customConfig.navigationTitle
-                defaultConfiguration?.noNotificationsView = customConfig.noNotificationsView
+                customNoNotifications = customConfig.noNotificationsView
                 defaultConfiguration?.navigationTitleColor = customConfig.navigationTitleColor
                 defaultConfiguration?.optionMenuTitles = customConfig.optionMenuTitles
                 defaultConfiguration?.optionMenuImage = customConfig.optionMenuImage
@@ -101,8 +102,8 @@ class WENotificationInboxViewController: UIViewController {
     }
     
     private func setupView() {
-        defaultConfiguration?.noNotificationsView = noNotificationsView
-        self.tableView?.addSubview(defaultConfiguration?.noNotificationsView ?? noNotificationsView)
+        noNotificationsView.isHidden = true
+        defaultConfiguration?.noNotificationsView = customNoNotifications ?? noNotificationsView
         self.tableView?.backgroundView = defaultConfiguration?.noNotificationsView
         self.tableView?.backgroundView?.isHidden = true
         self.view.backgroundColor = defaultConfiguration?.navigationBarColor
@@ -234,7 +235,7 @@ extension WENotificationInboxViewController: InboxCellDelegate {
     }
     
     func deleteEvent(_ inboxData: WEInboxMessage?, sender : Any) {
-//        inboxData?.markDelete()
+        inboxData?.markDelete()
         if let sender = sender as? UIButton{
             let point = sender.convert(CGPoint.zero, to: tableView)
             guard let indexPath = tableView?.indexPathForRow(at: point)

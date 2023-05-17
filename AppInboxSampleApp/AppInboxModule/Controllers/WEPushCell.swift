@@ -159,6 +159,12 @@ extension WEViewControllerConfigurationProtocol {
         }
         set {}
     }
+    var noNotificationsView: UIView {
+        get {
+            return UIView(frame: UIScreen.main.bounds)
+        }
+        set{}
+    }
 }
 
 extension WEPushCardConfigutationProtocol{
@@ -355,8 +361,6 @@ extension WEPushBannerConfigurationProtocol{
 
 class DefaultCellConfiguration: WEPushConfigurationProtocol{
     
-    var noNotificationsView: UIView = UIView()
-    
     var timeFormat: String = ""
     
     var navigationTitleColor: UIColor = .black
@@ -422,5 +426,7 @@ class DefaultCellConfiguration: WEPushConfigurationProtocol{
     var deleteButtonImageTintColor: UIColor = .red
     
     var imageViewCornerRadius: CGFloat = 6.0
+    
+    var noNotificationsView: UIView = UIView(frame: UIScreen.main.bounds)
 }
 
