@@ -122,7 +122,7 @@ class WENotificationInboxViewController: UIViewController {
             self.listOfInboxData += list
             noNotificationViewStatus = true
         }else{
-            if !list.isEmpty{
+            if !list.isEmpty || reset{
                noNotificationViewStatus = true
             }
             self.listOfInboxData = list
