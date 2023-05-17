@@ -19,6 +19,7 @@ class WENotificationInboxViewController: UIViewController {
     private var customCells: [WECustomCellProtocol]? = []
     private var defaultConfiguration: WEPushConfigurationProtocol? = DefaultCellConfiguration()
     private var customNoNotifications: UIView?
+    private var visitedIndex: [Int] = []
     
     @IBOutlet weak var optionMenu: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView?
@@ -62,7 +63,7 @@ class WENotificationInboxViewController: UIViewController {
             },
             UIAction (title: defaultConfiguration?.optionMenuTitles[1] ?? "Bulk Delete") {[unowned self](_) in
                 for inboxData in self.listOfInboxData {
-                //                inboxData.markDelete()
+                                inboxData.markDelete()
                             }
                 print("Bulk Delete...")
                 self.listOfInboxData = []
@@ -116,13 +117,19 @@ class WENotificationInboxViewController: UIViewController {
     }
     
     private func updateList(list:[WEInboxMessage],reset:Bool = false){
+        var noNotificationViewStatus: Bool = false
         if(hasNextPage && !reset){
             self.listOfInboxData += list
+            noNotificationViewStatus = true
         }else{
+            if !list.isEmpty{
+               noNotificationViewStatus = true
+            }
             self.listOfInboxData = list
         }
         
         DispatchQueue.main.async {
+            self.tableView?.backgroundView?.isHidden = noNotificationViewStatus
             self.tableView?.refreshControl?.endRefreshing()
             self.tableView?.reloadData()
         }
@@ -178,18 +185,15 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if listOfInboxData.isEmpty {
-            tableView.backgroundView?.isHidden = false
-            return 0
-        } else {
-            tableView.backgroundView?.isHidden = true
-            tableView.isHidden = false
-            return listOfInboxData.count
-        }
+        return listOfInboxData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let inboxData = listOfInboxData[indexPath.row]
+        if !(visitedIndex.contains(indexPath.row)) {
+            visitedIndex.append(indexPath.row)
+            viewEvent(inboxData)
+        }
         let pushTempleteData  = inboxData.message as? PushNotificationTemplateData
         let detailDictionary = pushTempleteData?.messageMap
         guard let layout = detailDictionary?["layoutType"] as? String else { return UITableViewCell() }

@@ -48,22 +48,29 @@ class HomeViewController: UIViewController {
     @IBAction func notificationButtonClick(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "WENotificationInbox", bundle: nil)
         let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "WENotificationInbox") as! WENotificationInboxViewController
-//        inboxViewController.setupCustomConfiguration(customConfiguration: CustomTextCard(), customizationFor: .text)
+//        inboxViewController.setupCustomConfiguration(customConfiguration: CustommyViewController(), customizationFor: .viewController)
         
         self.navigationController?.pushViewController(inboxViewController, animated: true)
     }
     
-    class CustomTextCard: WEPushTextConfigurationProtocol{
-        var titleFontColor: UIColor = .systemPink
-        var titleFont: String = "AmericanTypewriter"
-        var titleFontSize: CGFloat = 16
-        var descriptionFontSize: CGFloat = 18
-        var timeFontColor: UIColor = .red
-        var timeFont: String = "AmericanTypewriter"
-        var timeFormat: String = "EEEE, MMM d, yyyy"
-        var timeFontSize: CGFloat = 19
-    }
-
+//    class CustomTextCard: WEPushTextConfigurationProtocol{
+//        var titleFontColor: UIColor = .systemPink
+//        var titleFont: String = "AmericanTypewriter"
+//        var titleFontSize: CGFloat = 16
+//        var descriptionFontSize: CGFloat = 18
+//        var timeFontColor: UIColor = .red
+//        var timeFont: String = "AmericanTypewriter"
+//        var timeFormat: String = "EEEE, MMM d, yyyy"
+//        var timeFontSize: CGFloat = 19
+//    }
+//
+//    class  CustommyViewController: WEViewControllerConfigurationProtocol {
+//
+//
+//        var noNotificationsView: UIView = UIView()
+//    }
+    
+    
     private func performLogin() {
 
         let alert = UIAlertController(title: "Login", message: nil, preferredStyle: .alert)
@@ -90,6 +97,8 @@ class HomeViewController: UIViewController {
             UserDefaults.standard.set(loginID, forKey: Constants.login)
 
             self?.setLeftBarButton()
+            
+            self?.getCount()
 
             let confirmAlert = UIAlertController(title: "Login Success", message: "You are logged in now with ID: \(loginID)",
                 preferredStyle: .alert)
@@ -110,7 +119,7 @@ class HomeViewController: UIViewController {
 
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
             alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: {[weak self] (_) in
-
+                self?.badgeCountLabel.text = ""
                 WebEngage.sharedInstance()?.user.logout()
                 UserDefaults.standard.removeObject(forKey: Constants.login)
                 self?.setLeftBarButton()

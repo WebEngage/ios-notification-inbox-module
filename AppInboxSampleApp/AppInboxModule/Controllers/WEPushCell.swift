@@ -149,7 +149,7 @@ extension WEViewControllerConfigurationProtocol {
     
     var navigationBarTintColor: UIColor {
         get {
-            return .blue
+            return .tintColor
         }
         set {}
     }
