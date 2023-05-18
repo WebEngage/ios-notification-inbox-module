@@ -63,11 +63,15 @@ class WENotificationInboxViewController: UIViewController {
             },
             UIAction (title: defaultConfiguration?.optionMenuTitles[1] ?? "Bulk Delete") {[unowned self](_) in
                 for inboxData in self.listOfInboxData {
-                                inboxData.markDelete()
-                            }
+                    inboxData.markDelete()
+                }
                 print("Bulk Delete...")
                 self.listOfInboxData = []
-                self.tableView?.backgroundView?.isHidden = false
+                if !self.hasNextPage {
+                    self.tableView?.backgroundView?.isHidden = false
+                } else {
+                    self.callPullToRefresh()
+                }
                 self.tableView?.reloadData()
             }
         ])
