@@ -33,6 +33,7 @@ class WENotificationInboxViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        WENotificationInbox.shared.onNotificationIconClick()
         setupView()
         tableView?.delegate = self
         tableView?.dataSource = self
@@ -63,14 +64,16 @@ class WENotificationInboxViewController: UIViewController {
             },
             UIAction (title: defaultConfiguration?.optionMenuTitles[1] ?? "Bulk Delete") {[unowned self](_) in
                 for inboxData in self.listOfInboxData {
-                    inboxData.markDelete()
+//                    inboxData.markDelete()
                 }
                 print("Bulk Delete...")
-                self.listOfInboxData = []
                 if !self.hasNextPage {
                     self.tableView?.backgroundView?.isHidden = false
                 } else {
-                    self.callPullToRefresh()
+                    let lastItem = listOfInboxData[listOfInboxData.count-1]
+                    self.listOfInboxData = []
+                    self.tableView?.refreshControl?.beginRefreshing()
+                    loadAppInboxData(lastInboxData: lastItem)
                 }
                 self.tableView?.reloadData()
             }
@@ -142,6 +145,7 @@ class WENotificationInboxViewController: UIViewController {
     private func loadAppInboxData(lastInboxData : WEInboxMessage? = nil, shouldResetAllList:Bool = false){
         WENotificationInbox.shared.getNotificationList(lastInboxData: lastInboxData,
                                                        completion: { [weak self] data, error in
+           
             if let response = data{
                 self?.updateList(list: response.messageList,reset: shouldResetAllList)
                 self?.hasNextPage = response.hasNextPage
@@ -149,6 +153,7 @@ class WENotificationInboxViewController: UIViewController {
                 WELogger.d("Error: \(weInboxError)")
             }
             DispatchQueue.main.async {
+                self?.tableView?.tableFooterView = nil
                 self?.tableView?.refreshControl?.endRefreshing()
             }
         })
@@ -178,6 +183,16 @@ class WENotificationInboxViewController: UIViewController {
             cell.contentView.backgroundColor = defaultConfiguration?.backgroundColor
             return cell
         }
+    }
+    
+    private func createSpinnerFooter()-> UIView{
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return footerView
     }
 }
 
@@ -220,6 +235,7 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
         let lastItem = listOfInboxData.count - 1
         if indexPath.row == lastItem {
             if(hasNextPage){
+                self.tableView?.tableFooterView = createSpinnerFooter()
                 loadAppInboxData(lastInboxData: listOfInboxData[listOfInboxData.count-1])
             }
         }
@@ -243,7 +259,7 @@ extension WENotificationInboxViewController: InboxCellDelegate {
     }
     
     func deleteEvent(_ inboxData: WEInboxMessage?, sender : Any) {
-        inboxData?.markDelete()
+//        inboxData?.markDelete()
         if let sender = sender as? UIButton{
             let point = sender.convert(CGPoint.zero, to: tableView)
             guard let indexPath = tableView?.indexPathForRow(at: point)

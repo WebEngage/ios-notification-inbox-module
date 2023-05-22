@@ -46,7 +46,6 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func notificationButtonClick(_ sender: Any) {
-        WENotificationInbox.shared.onNotificationIconClick()
         let storyBoard: UIStoryboard = UIStoryboard(name: "WENotificationInbox", bundle: nil)
         let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "WENotificationInbox") as! WENotificationInboxViewController
 //        inboxViewController.setupCustomConfiguration(customConfiguration: CustomTextCard(), customizationFor: .text)
