@@ -64,7 +64,7 @@ class WENotificationInboxViewController: UIViewController {
             },
             UIAction (title: defaultConfiguration?.optionMenuTitles[1] ?? "Bulk Delete") {[unowned self](_) in
                 for inboxData in self.listOfInboxData {
-                    inboxData.markDelete()
+//                    inboxData.markDelete()
                 }
                 print("Bulk Delete...")
                 if !self.hasNextPage {
@@ -138,7 +138,6 @@ class WENotificationInboxViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.tableView?.backgroundView?.isHidden = noNotificationViewStatus
-            self.tableView?.refreshControl?.endRefreshing()
             self.tableView?.reloadData()
         }
     }
@@ -260,7 +259,7 @@ extension WENotificationInboxViewController: InboxCellDelegate {
     }
     
     func deleteEvent(_ inboxData: WEInboxMessage?, sender : Any) {
-        inboxData?.markDelete()
+//        inboxData?.markDelete()
         if let sender = sender as? UIButton{
             let point = sender.convert(CGPoint.zero, to: tableView)
             guard let indexPath = tableView?.indexPathForRow(at: point)
