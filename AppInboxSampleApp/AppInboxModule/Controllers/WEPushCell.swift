@@ -11,14 +11,27 @@ import WENotificationInbox
 
 // MARK: - Enums
 
-enum cellType: String {
-    case text = "TEXT"
-    case banner = "BANNER"
-    case rating = "RATING"
-    case carousel = "CAROUSEL"
+@objc enum CellType: Int {
+    case text
+    case banner
+    case rating
+    case carousel
+    
+    var stringValue: String {
+        switch self {
+        case .text:
+            return "TEXT"
+        case .banner:
+            return "BANNER"
+        case .rating:
+            return "RATING"
+        case .carousel:
+            return "CAROUSEL"
+        }
+    }
 }
 
-enum customConfig{
+@objc enum customConfig: Int{
     case text
     case banner
     case viewController
@@ -31,7 +44,6 @@ enum labelType{
 }
 
 // MARK: - Protocols
-
 protocol InboxCellDelegate: NSObject {
     func readEvent(_: WEInboxMessage?)
     func unreadEvent(_: WEInboxMessage?)
@@ -40,70 +52,69 @@ protocol InboxCellDelegate: NSObject {
     func deleteEvent(_: WEInboxMessage?, sender: Any)
 }
 
-protocol WEViewControllerConfigurationProtocol{
-    var backgroundColor: UIColor {get set}
-    var navigationBarColor: UIColor {get set}
-    var navigationBarTintColor: UIColor {get set}
-    var navigationTitle: String {get set}
-    var navigationTitleColor: UIColor {get set}
-    var noNotificationsView: UIView {get set}
-    var optionMenuImage: UIImage {get set}
-    var optionMenuTitles: [String] {get set}
+@objc protocol WEViewControllerConfigurationProtocol{
+    @objc optional var backgroundColor: UIColor {get set}
+    @objc optional var navigationBarColor: UIColor {get set}
+    @objc optional var navigationBarTintColor: UIColor {get set}
+    @objc optional var navigationTitle: String {get set}
+    @objc optional var navigationTitleColor: UIColor {get set}
+    @objc optional var noNotificationsView: UIView {get set}
+    @objc optional var optionMenuImage: UIImage {get set}
+    @objc optional var optionMenuTitles: [String] {get set}
 }
-
-protocol WECustomCellProtocol{
-    var cellReuseIdentifier : cellType {get set}
+@objc protocol WECustomCellProtocol{
+    var cellReuseIdentifier : CellType {get set}
     func setupcell(inboxData: AnyObject, index: Int)
 }
 
-protocol WEPushCardConfigutationProtocol {
-    var cardBackgroundColor: UIColor {get set}
-    var cornerRadius: CGFloat {get set}
-    var shadowColor : UIColor {get set}
-    var shadow0ffSetWidth : Int {get set}
-    var shadow0ffSetHeight : Int {get set}
-    var shadowOpacity : Float {get set}
+@objc protocol WEPushCardConfigutationProtocol {
+    @objc optional var cardBackgroundColor: UIColor {get set}
+    @objc optional var cornerRadius: CGFloat {get set}
+    @objc optional var shadowColor : UIColor {get set}
+    @objc optional var shadow0ffSetWidth : Int {get set}
+    @objc optional var shadow0ffSetHeight : Int {get set}
+    @objc optional var shadowOpacity : Float {get set}
 }
 
-protocol WEPushTextConfigurationProtocol:WEPushCardConfigutationProtocol {
-    var titleFont: String {get set}
-    var titleFontSize: CGFloat {get set}
-    var titleFontColor: UIColor {get set}
+@objc protocol WEPushTextConfigurationProtocol:WEPushCardConfigutationProtocol {
+    @objc optional var titleFont: String {get set}
+    @objc optional var titleFontSize: CGFloat {get set}
+    @objc optional var titleFontColor: UIColor {get set}
     
-    var descriptionFont: String {get set}
-    var descriptionFontSize: CGFloat {get set}
-    var descriptionFontColor: UIColor {get set}
+    @objc optional var descriptionFont: String {get set}
+    @objc optional var descriptionFontSize: CGFloat {get set}
+    @objc optional var descriptionFontColor: UIColor {get set}
     
-    var timeFont: String {get set}
-    var timeFontSize: CGFloat {get set}
-    var timeFontColor: UIColor {get set}
-    var timeFormat: String {get set}
+    @objc optional var timeFont: String {get set}
+    @objc optional var timeFontSize: CGFloat {get set}
+    @objc optional var timeFontColor: UIColor {get set}
+    @objc optional var timeFormat: String {get set}
     
-    var readButtonImage: UIImage {get set}
-    var readButtonImageTintColor: UIColor {get set}
+    @objc optional var readButtonImage: UIImage {get set}
+    @objc optional var readButtonImageTintColor: UIColor {get set}
     
-    var unReadButtonImage: UIImage {get set}
-    var unReadButtonImageTintColor: UIColor {get set}
+    @objc optional var unReadButtonImage: UIImage {get set}
+    @objc optional var unReadButtonImageTintColor: UIColor {get set}
     
-    var deleteButtonImage: UIImage {get set}
-    var deleteButtonImageTintColor: UIColor {get set}
+    @objc optional var deleteButtonImage: UIImage {get set}
+    @objc optional var deleteButtonImageTintColor: UIColor {get set}
     
-    var readUnreadButtonVisibility: Bool {get set}
-    var deleteButtonVisibility: Bool {get set}
+    @objc optional var readUnreadButtonVisibility: Bool {get set}
+    @objc optional var deleteButtonVisibility: Bool {get set}
 }
 
-protocol WEPushBannerConfigurationProtocol: WEPushTextConfigurationProtocol  {
-    var imageViewCornerRadius: CGFloat {get set}
-    var imageViewContentMode: UIView.ContentMode {get set}
+@objc protocol WEPushBannerConfigurationProtocol: WEPushTextConfigurationProtocol  {
+    @objc optional var imageViewCornerRadius: CGFloat {get set}
+    @objc optional var imageViewContentMode: UIView.ContentMode {get set}
 }
 
-protocol WEPushConfigurationProtocol: WEPushCardConfigutationProtocol,WEPushTextConfigurationProtocol,WEPushBannerConfigurationProtocol,WEViewControllerConfigurationProtocol {
+@objc protocol WEPushConfigurationProtocol: WEPushCardConfigutationProtocol,WEPushTextConfigurationProtocol,WEPushBannerConfigurationProtocol,WEViewControllerConfigurationProtocol {
     
 }
 
 // MARK: - Extensions
 extension WECustomCellProtocol{
-    var cellReuseIdentifier: cellType{
+    var cellReuseIdentifier: CellType{
         get{
             return .text
         }
@@ -171,7 +182,7 @@ extension WEPushCardConfigutationProtocol{
     
     var cornerRadius: CGFloat {
         get {
-            return 6.0  
+            return 6.0
         }
         set {}
     }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct WEUtils{
     
@@ -71,41 +72,113 @@ struct WEUtils{
     static func setupCustomConfiguration(customConfiguration: AnyObject, cellStyle: DefaultCellConfiguration) -> DefaultCellConfiguration{
         
         if let customConfig = customConfiguration as? WEPushCardConfigutationProtocol{
-            cellStyle.cornerRadius = customConfig.cornerRadius
-            cellStyle.shadowColor = customConfig.shadowColor
-            cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
-            cellStyle.shadow0ffSetWidth = customConfig.shadow0ffSetWidth
-            cellStyle.shadowOpacity = customConfig.shadowOpacity
-            cellStyle.cardBackgroundColor = customConfig.cardBackgroundColor
-            cellStyle.imageViewCornerRadius = customConfig.cornerRadius
+            if let cornerRadius = customConfig.cornerRadius {
+                cellStyle.cornerRadius = cornerRadius
+            }
+            if let shadowColor = customConfig.shadowColor {
+                cellStyle.shadowColor = shadowColor
+            }
+
+            if let shadowOffsetWidth = customConfig.shadow0ffSetWidth {
+                cellStyle.shadow0ffSetWidth = shadowOffsetWidth
+            }
+
+            if let shadowOffsetHeight = customConfig.shadow0ffSetHeight {
+                cellStyle.shadow0ffSetHeight = shadowOffsetHeight
+            }
+
+            if let shadowOpacity = customConfig.shadowOpacity {
+                cellStyle.shadowOpacity = shadowOpacity
+            }
+
+            if let cardBackgroundColor = customConfig.cardBackgroundColor {
+                cellStyle.cardBackgroundColor = cardBackgroundColor
+            }
         }
         
         if let customConfig =  customConfiguration as? WEPushTextConfigurationProtocol{
-            cellStyle.titleFont = customConfig.titleFont
-            cellStyle.titleFontSize = customConfig.titleFontSize
-            cellStyle.titleFontColor = customConfig.titleFontColor
-            cellStyle.descriptionFont = customConfig.descriptionFont
-            cellStyle.descriptionFontSize = customConfig.descriptionFontSize
-            cellStyle.descriptionFontColor = customConfig.descriptionFontColor
-            
-            cellStyle.timeFont = customConfig.timeFont
-            cellStyle.timeFontSize = customConfig.timeFontSize
-            cellStyle.timeFontColor = customConfig.timeFontColor
-            cellStyle.timeFormat = customConfig.timeFormat
-            
-            cellStyle.readButtonImage = customConfig.readButtonImage
-            cellStyle.readButtonImageTintColor = customConfig.readButtonImageTintColor
-            cellStyle.unReadButtonImage = customConfig.unReadButtonImage
-            cellStyle.unReadButtonImageTintColor = customConfig.unReadButtonImageTintColor
-            cellStyle.deleteButtonImage = customConfig.deleteButtonImage
-            cellStyle.deleteButtonImageTintColor = customConfig.deleteButtonImageTintColor
-            cellStyle.readUnreadButtonVisibility = customConfig.readUnreadButtonVisibility
-            cellStyle.deleteButtonVisibility = customConfig.deleteButtonVisibility
+            if let titleFont = customConfig.titleFont {
+                cellStyle.titleFont = titleFont
+            }
+
+            if let titleFontSize = customConfig.titleFontSize {
+                cellStyle.titleFontSize = titleFontSize
+            }
+
+            if let titleFontColor = customConfig.titleFontColor {
+                cellStyle.titleFontColor = titleFontColor
+            }
+
+            if let descriptionFont = customConfig.descriptionFont {
+                cellStyle.descriptionFont = descriptionFont
+            }
+
+            if let descriptionFontSize = customConfig.descriptionFontSize {
+                cellStyle.descriptionFontSize = descriptionFontSize
+            }
+
+            if let descriptionFontColor = customConfig.descriptionFontColor {
+                cellStyle.descriptionFontColor = descriptionFontColor
+            }
+
+            if let timeFont = customConfig.timeFont {
+                cellStyle.timeFont = timeFont
+            }
+
+            if let timeFontSize = customConfig.timeFontSize {
+                cellStyle.timeFontSize = timeFontSize
+            }
+
+            if let timeFontColor = customConfig.timeFontColor {
+                cellStyle.timeFontColor = timeFontColor
+            }
+
+            if let timeFormat = customConfig.timeFormat {
+                cellStyle.timeFormat = timeFormat
+            }
+
+            if let readButtonImage = customConfig.readButtonImage {
+                cellStyle.readButtonImage = readButtonImage
+            }
+
+            if let readButtonImageTintColor = customConfig.readButtonImageTintColor {
+                cellStyle.readButtonImageTintColor = readButtonImageTintColor
+            }
+
+            if let unReadButtonImage = customConfig.unReadButtonImage {
+                cellStyle.unReadButtonImage = unReadButtonImage
+            }
+
+            if let unReadButtonImageTintColor = customConfig.unReadButtonImageTintColor {
+                cellStyle.unReadButtonImageTintColor = unReadButtonImageTintColor
+            }
+
+            if let deleteButtonImage = customConfig.deleteButtonImage {
+                cellStyle.deleteButtonImage = deleteButtonImage
+            }
+
+            if let deleteButtonImageTintColor = customConfig.deleteButtonImageTintColor {
+                cellStyle.deleteButtonImageTintColor = deleteButtonImageTintColor
+            }
+
+            if let readUnreadButtonVisibility = customConfig.readUnreadButtonVisibility {
+                cellStyle.readUnreadButtonVisibility = readUnreadButtonVisibility
+            }
+
+            if let deleteButtonVisibility = customConfig.deleteButtonVisibility {
+                cellStyle.deleteButtonVisibility = deleteButtonVisibility
+            }
+
         }
         
         if let customConfig =  customConfiguration as? WEPushBannerConfigurationProtocol{
-            cellStyle.imageViewCornerRadius = customConfig.imageViewCornerRadius
-            cellStyle.imageViewContentMode = customConfig.imageViewContentMode
+            if let imageViewCornerRadius = customConfig.imageViewCornerRadius {
+                cellStyle.imageViewCornerRadius = imageViewCornerRadius
+            }
+
+            if let imageViewContentMode = customConfig.imageViewContentMode {
+                cellStyle.imageViewContentMode = imageViewContentMode
+            }
         }
         return cellStyle
     }

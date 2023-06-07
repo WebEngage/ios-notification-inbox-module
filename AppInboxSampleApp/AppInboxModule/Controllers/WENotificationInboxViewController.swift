@@ -82,7 +82,7 @@ class WENotificationInboxViewController: UIViewController {
         return addMenuItems
     }
     
-    func setupCustomConfiguration(customConfiguration: AnyObject, customizationFor config  : customConfig){
+   @objc func setupCustomConfiguration(customConfiguration: AnyObject, customizationFor config  : customConfig){
         switch config {
         case customConfig.text:
             customTextConfiguration = customConfiguration
@@ -91,21 +91,15 @@ class WENotificationInboxViewController: UIViewController {
             customBannerConfiguration = customConfiguration
             
         case customConfig.viewController:
-            if let customConfig = customConfiguration as? WEViewControllerConfigurationProtocol{
-                defaultConfiguration?.navigationTitle = customConfig.navigationTitle
-                customNoNotifications = customConfig.noNotificationsView
-                defaultConfiguration?.navigationTitleColor = customConfig.navigationTitleColor
-                defaultConfiguration?.optionMenuTitles = customConfig.optionMenuTitles
-                defaultConfiguration?.optionMenuImage = customConfig.optionMenuImage
-                defaultConfiguration?.navigationBarColor = customConfig.navigationBarColor
-                defaultConfiguration?.navigationBarTintColor = customConfig.navigationBarTintColor
-                defaultConfiguration?.backgroundColor = customConfig.backgroundColor
-            }
+            setupCustomViewController(customConfiguration: customConfiguration)
+        
+        default:
+             break
         }
     }
     
-    func setupCustomCell(customCell: WECustomCellProtocol, forCellType cellType  : cellType){
-        var usersCell = customCell
+    @objc func setupCustomCell(customCell: WECustomCellProtocol, forCellType cellType  : CellType){
+        let usersCell = customCell
         usersCell.cellReuseIdentifier = cellType
         customCells?.append(usersCell)
     }
@@ -194,6 +188,41 @@ class WENotificationInboxViewController: UIViewController {
         
         return footerView
     }
+    
+    private func setupCustomViewController(customConfiguration:AnyObject){
+        if let customConfig = customConfiguration as? WEViewControllerConfigurationProtocol{
+            if let noNotificationsView = customConfig.noNotificationsView {
+                customNoNotifications = noNotificationsView
+            }
+            if let navigationTitle = customConfig.navigationTitle {
+                defaultConfiguration?.navigationTitle = navigationTitle
+            }
+            
+            if let navigationTitleColor = customConfig.navigationTitleColor {
+                defaultConfiguration?.navigationTitleColor = navigationTitleColor
+            }
+            
+            if let optionMenuTitles = customConfig.optionMenuTitles {
+                defaultConfiguration?.optionMenuTitles = optionMenuTitles
+            }
+            
+            if let optionMenuImage = customConfig.optionMenuImage {
+                defaultConfiguration?.optionMenuImage = optionMenuImage
+            }
+            
+            if let navigationBarColor = customConfig.navigationBarColor {
+                defaultConfiguration?.navigationBarColor = navigationBarColor
+            }
+            
+            if let navigationBarTintColor = customConfig.navigationBarTintColor {
+                defaultConfiguration?.navigationBarTintColor = navigationBarTintColor
+            }
+            
+            if let backgroundColor = customConfig.backgroundColor {
+                defaultConfiguration?.backgroundColor = backgroundColor
+            }
+        }
+    }
 }
 
 extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDataSource {
@@ -218,8 +247,8 @@ extension WENotificationInboxViewController: UITableViewDelegate, UITableViewDat
         guard let layout = detailDictionary?["layoutType"] as? String else { return UITableViewCell() }
         if let customCells = customCells{
             for customCell in customCells{
-                if (customCell.cellReuseIdentifier.rawValue == layout){
-                    if let cell = tableView.dequeueReusableCell(withIdentifier: customCell.cellReuseIdentifier.rawValue) as?  UITableViewCell & WECustomCellProtocol{
+                if (customCell.cellReuseIdentifier.stringValue == layout){
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: customCell.cellReuseIdentifier.stringValue) as?  UITableViewCell & WECustomCellProtocol{
                         cell.setupcell(inboxData: inboxData, index: indexPath.row)
                         return cell
                     }
@@ -259,7 +288,7 @@ extension WENotificationInboxViewController: InboxCellDelegate {
     }
     
     func deleteEvent(_ inboxData: WEInboxMessage?, sender : Any) {
-//        inboxData?.markDelete()
+        inboxData?.markDelete()
         if let sender = sender as? UIButton{
             let point = sender.convert(CGPoint.zero, to: tableView)
             guard let indexPath = tableView?.indexPathForRow(at: point)
