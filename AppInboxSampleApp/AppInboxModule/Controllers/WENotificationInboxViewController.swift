@@ -106,8 +106,11 @@ class WENotificationInboxViewController: UIViewController {
     
     private func setupView() {
         noNotificationsView.isHidden = true
-        defaultConfiguration?.noNotificationsView = customNoNotifications ?? noNotificationsView
-        self.tableView?.backgroundView = defaultConfiguration?.noNotificationsView
+        if let customNoNotifications = customNoNotifications {
+            self.tableView?.backgroundView = customNoNotifications
+        } else {
+            self.tableView?.backgroundView = noNotificationsView
+        }
         self.tableView?.backgroundView?.isHidden = true
         self.view.backgroundColor = defaultConfiguration?.navigationBarColor
         self.navigationController?.navigationBar.tintColor = defaultConfiguration?.navigationBarTintColor
