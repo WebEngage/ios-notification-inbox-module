@@ -17,6 +17,7 @@
 		3E4947F829F65C0500964472 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E4947F629F65C0500964472 /* LaunchScreen.storyboard */; };
 		3E49482029F66B3A00964472 /* WENotificationInboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E49481F29F66B3A00964472 /* WENotificationInboxViewController.swift */; };
 		3E7B513A2A31EAC2001256F3 /* WEPushTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B51392A31EAC2001256F3 /* WEPushTextTableViewCell.xib */; };
+		3E8A5E712A31F57600E22868 /* WENotificationInboxViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A5E702A31F57600E22868 /* WENotificationInboxViewControllerExtension.swift */; };
 		3E970F502A319F1300266F7B /* WEDefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E970F4F2A319F1300266F7B /* WEDefaultCell.swift */; };
 		3E970F522A31A83600266F7B /* WEConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E970F512A31A83600266F7B /* WEConstants.swift */; };
 		3EB5EF1D2A00A5600041533E /* WENotificationInbox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EB5EF1C2A00A5600041533E /* WENotificationInbox.storyboard */; };
@@ -44,6 +45,7 @@
 		3E49481F29F66B3A00964472 /* WENotificationInboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WENotificationInboxViewController.swift; sourceTree = "<group>"; };
 		3E62D69C29FB54F900362BFF /* WENotificationInbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WENotificationInbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7B51392A31EAC2001256F3 /* WEPushTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WEPushTextTableViewCell.xib; path = ../../../../../../../WEPushTextTableViewCell.xib; sourceTree = "<group>"; };
+		3E8A5E702A31F57600E22868 /* WENotificationInboxViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WENotificationInboxViewControllerExtension.swift; sourceTree = "<group>"; };
 		3E970F4F2A319F1300266F7B /* WEDefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEDefaultCell.swift; sourceTree = "<group>"; };
 		3E970F512A31A83600266F7B /* WEConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEConstants.swift; sourceTree = "<group>"; };
 		3EB5EF1C2A00A5600041533E /* WENotificationInbox.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WENotificationInbox.storyboard; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				3EBC5CF22A025AD5004780C7 /* WEPushBannerTableViewCell.swift */,
 				3EBC5CF12A025AD5004780C7 /* WEPushTextTableViewCell.swift */,
 				3E49481F29F66B3A00964472 /* WENotificationInboxViewController.swift */,
+				3E8A5E702A31F57600E22868 /* WENotificationInboxViewControllerExtension.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				3EBC5CF32A025AD5004780C7 /* WEPushTextTableViewCell.swift in Sources */,
 				3EBC5CF42A025AD5004780C7 /* WEPushBannerTableViewCell.swift in Sources */,
 				3E970F502A319F1300266F7B /* WEDefaultCell.swift in Sources */,
+				3E8A5E712A31F57600E22868 /* WENotificationInboxViewControllerExtension.swift in Sources */,
 				3E39F86829FB697200D1B992 /* WEPushCellProtocols.swift in Sources */,
 				3E4947F029F65C0400964472 /* HomeViewController.swift in Sources */,
 				3E970F522A31A83600266F7B /* WEConstants.swift in Sources */,
