@@ -97,7 +97,7 @@ class WENotificationInboxViewController: UIViewController {
             },
             UIAction (title: defaultConfiguration.optionMenuTitles[1] ) {[unowned self](_) in
                 for inboxData in self.listOfInboxData {
-//                    inboxData.markDelete()
+                    inboxData.markDelete()
                 }
                 print("Bulk Delete...")
                 if !self.hasNextPage {

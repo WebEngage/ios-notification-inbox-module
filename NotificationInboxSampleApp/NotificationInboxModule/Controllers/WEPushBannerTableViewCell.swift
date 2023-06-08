@@ -66,7 +66,7 @@ class WEPushBannerTableViewCell: UITableViewCell {
                     URLSession.shared.dataTask(with: imageURL) { [weak self] data, response, error in
                         guard let self = self else { return }
                         guard let data = data, error == nil else { return }
-                        DispatchQueue.main.async { // execute on main thread
+                        DispatchQueue.main.async { 
                             self.notificationImageView.image = UIImage(data: data)
                         }
                     }.resume()

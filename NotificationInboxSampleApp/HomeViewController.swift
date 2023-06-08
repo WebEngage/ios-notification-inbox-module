@@ -154,7 +154,7 @@ class HomeViewController: UIViewController {
     }
     
     private func showBadge(withCount count: String) {
-        // ===== THis code is used to show the notification Badge Count =====
+        // ===== This code is used to show the notification Badge Count =====
         let badge = badgeLabel(withCount: count)
         notificationButton.addSubview(badge)
 
