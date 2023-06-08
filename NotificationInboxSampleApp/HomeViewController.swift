@@ -87,8 +87,7 @@ class HomeViewController: UIViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "WENotificationInbox", bundle: nil)
         let inboxViewController = storyBoard.instantiateViewController(withIdentifier: "WENotificationInbox") as! WENotificationInboxViewController
         // ===== You can add the customization code here =====
-//        inboxViewController.setupCustomConfiguration(customConfiguration: CustomTextCard(), customizationFor: .text)
-//        inboxViewController.setupCustomConfiguration(customConfiguration: CustommyViewController(), customizationFor: .viewController)
+
         self.navigationController?.pushViewController(inboxViewController, animated: true)
     }
     
@@ -167,19 +166,4 @@ class HomeViewController: UIViewController {
                                     ])
         self.navigationItem.rightBarButtonItems?.append(UIBarButtonItem(customView:notificationButton))
     }
-}
-
-class CustomTextCard: WEPushTextConfigurationProtocol{
-    var titleFontColor: UIColor = .systemPink
-    var titleFont: String = "AmericanTypewriter"
-    var titleFontSize: CGFloat = 16
-    var descriptionFontSize: CGFloat = 18
-    var timeFontColor: UIColor = .red
-    var timeFont: String = "AmericanTypewriter"
-    var timeFormat: String = "EEEE, MMM d, yyyy"
-    var timeFontSize: CGFloat = 18
-}
-
-class  CustommyViewController: WEViewControllerConfigurationProtocol {
-    var noNotificationsView: UIView = UIView()
 }
