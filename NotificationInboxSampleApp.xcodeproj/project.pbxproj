@@ -23,17 +23,16 @@
 		3EBC5CF02A025A7A004780C7 /* WEPushBannerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC5CEF2A025A7A004780C7 /* WEPushBannerTableViewCell.xib */; };
 		3EBC5CF32A025AD5004780C7 /* WEPushTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBC5CF12A025AD5004780C7 /* WEPushTextTableViewCell.swift */; };
 		3EBC5CF42A025AD5004780C7 /* WEPushBannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBC5CF22A025AD5004780C7 /* WEPushBannerTableViewCell.swift */; };
-		C54C0883DAB69BA0640BAF2C /* libPods-AppInboxSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D35444254D4223F29A5C6ED /* libPods-AppInboxSampleApp.a */; };
+		D6C3063BD910828D26DD8646 /* libPods-NotificationInboxSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F1DA83AE0963AD0B6B06B8 /* libPods-NotificationInboxSampleApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C7FB8831554AC49FD017541 /* Pods-AppInboxSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppInboxSampleApp.release.xcconfig"; path = "Target Support Files/Pods-AppInboxSampleApp/Pods-AppInboxSampleApp.release.xcconfig"; sourceTree = "<group>"; };
-		1318B050E31184FA69D8C5A4 /* Pods-AppInboxSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppInboxSampleApp.debug.xcconfig"; path = "Target Support Files/Pods-AppInboxSampleApp/Pods-AppInboxSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		09E91D97738C9EBAE5734AD3 /* Pods-NotificationInboxSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationInboxSampleApp.debug.xcconfig"; path = "Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		3E14571A2A01030000C29BED /* WENotificationInbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WENotificationInbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E14571F2A010DDC00C29BED /* WENotificationInbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WENotificationInbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E39F86529FB661500D1B992 /* WEUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEUtils.swift; sourceTree = "<group>"; };
 		3E39F86729FB697200D1B992 /* WEPushCellProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEPushCellProtocols.swift; sourceTree = "<group>"; };
-		3E4947E829F65C0400964472 /* AppInboxSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppInboxSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E4947E829F65C0400964472 /* NotificationInboxSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationInboxSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4947EB29F65C0400964472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E4947ED29F65C0400964472 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3E4947EF29F65C0400964472 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -41,7 +40,7 @@
 		3E4947F429F65C0500964472 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E4947F729F65C0500964472 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E4947F929F65C0500964472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E49480529F65E9A00964472 /* AppInboxSampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppInboxSampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		3E49480529F65E9A00964472 /* NotificationInboxSampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotificationInboxSampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		3E49481F29F66B3A00964472 /* WENotificationInboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WENotificationInboxViewController.swift; sourceTree = "<group>"; };
 		3E62D69C29FB54F900362BFF /* WENotificationInbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WENotificationInbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7B51392A31EAC2001256F3 /* WEPushTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WEPushTextTableViewCell.xib; path = ../../../../../../../WEPushTextTableViewCell.xib; sourceTree = "<group>"; };
@@ -51,7 +50,8 @@
 		3EBC5CEF2A025A7A004780C7 /* WEPushBannerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WEPushBannerTableViewCell.xib; sourceTree = "<group>"; };
 		3EBC5CF12A025AD5004780C7 /* WEPushTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WEPushTextTableViewCell.swift; sourceTree = "<group>"; };
 		3EBC5CF22A025AD5004780C7 /* WEPushBannerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WEPushBannerTableViewCell.swift; sourceTree = "<group>"; };
-		4D35444254D4223F29A5C6ED /* libPods-AppInboxSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppInboxSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75F1DA83AE0963AD0B6B06B8 /* libPods-NotificationInboxSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotificationInboxSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EA2DB6D48F12C9AAF891A90 /* Pods-NotificationInboxSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationInboxSampleApp.release.xcconfig"; path = "Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C54C0883DAB69BA0640BAF2C /* libPods-AppInboxSampleApp.a in Frameworks */,
+				D6C3063BD910828D26DD8646 /* libPods-NotificationInboxSampleApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,23 +80,23 @@
 		3E4947DF29F65C0400964472 = {
 			isa = PBXGroup;
 			children = (
-				3E4947EA29F65C0400964472 /* AppInboxSampleApp */,
+				3E4947EA29F65C0400964472 /* NotificationInboxSampleApp */,
 				3E4947E929F65C0400964472 /* Products */,
 				604F5593FDA8AB22B7FD94D6 /* Pods */,
 				6040C648DBA9E2E6C989D7F4 /* Frameworks */,
-				3E49480529F65E9A00964472 /* AppInboxSampleApp-Bridging-Header.h */,
+				3E49480529F65E9A00964472 /* NotificationInboxSampleApp-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
 		3E4947E929F65C0400964472 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3E4947E829F65C0400964472 /* AppInboxSampleApp.app */,
+				3E4947E829F65C0400964472 /* NotificationInboxSampleApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3E4947EA29F65C0400964472 /* AppInboxSampleApp */ = {
+		3E4947EA29F65C0400964472 /* NotificationInboxSampleApp */ = {
 			isa = PBXGroup;
 			children = (
 				3E39F85F29FB5E2600D1B992 /* NotificationInboxModule */,
@@ -108,7 +108,7 @@
 				3E4947F629F65C0500964472 /* LaunchScreen.storyboard */,
 				3E4947F929F65C0500964472 /* Info.plist */,
 			);
-			path = AppInboxSampleApp;
+			path = NotificationInboxSampleApp;
 			sourceTree = "<group>";
 		};
 		3E49480829F6625E00964472 /* View */ = {
@@ -163,7 +163,7 @@
 				3E14571F2A010DDC00C29BED /* WENotificationInbox.framework */,
 				3E14571A2A01030000C29BED /* WENotificationInbox.framework */,
 				3E62D69C29FB54F900362BFF /* WENotificationInbox.framework */,
-				4D35444254D4223F29A5C6ED /* libPods-AppInboxSampleApp.a */,
+				75F1DA83AE0963AD0B6B06B8 /* libPods-NotificationInboxSampleApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -171,8 +171,8 @@
 		604F5593FDA8AB22B7FD94D6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1318B050E31184FA69D8C5A4 /* Pods-AppInboxSampleApp.debug.xcconfig */,
-				0C7FB8831554AC49FD017541 /* Pods-AppInboxSampleApp.release.xcconfig */,
+				09E91D97738C9EBAE5734AD3 /* Pods-NotificationInboxSampleApp.debug.xcconfig */,
+				9EA2DB6D48F12C9AAF891A90 /* Pods-NotificationInboxSampleApp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -180,23 +180,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3E4947E729F65C0400964472 /* AppInboxSampleApp */ = {
+		3E4947E729F65C0400964472 /* NotificationInboxSampleApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E4947FC29F65C0500964472 /* Build configuration list for PBXNativeTarget "AppInboxSampleApp" */;
+			buildConfigurationList = 3E4947FC29F65C0500964472 /* Build configuration list for PBXNativeTarget "NotificationInboxSampleApp" */;
 			buildPhases = (
-				F591F002BB30B6EC93402856 /* [CP] Check Pods Manifest.lock */,
+				1E2BFB98E3557C2DF0B011D3 /* [CP] Check Pods Manifest.lock */,
 				3E4947E429F65C0400964472 /* Sources */,
 				3E4947E529F65C0400964472 /* Frameworks */,
 				3E4947E629F65C0400964472 /* Resources */,
-				385F9D2C9197B8DC499804B8 /* [CP] Embed Pods Frameworks */,
+				957F727773CCDD5DD362BCE0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = AppInboxSampleApp;
+			name = NotificationInboxSampleApp;
 			productName = AppInboxSampleApp;
-			productReference = 3E4947E829F65C0400964472 /* AppInboxSampleApp.app */;
+			productReference = 3E4947E829F65C0400964472 /* NotificationInboxSampleApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -215,7 +215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3E4947E329F65C0400964472 /* Build configuration list for PBXProject "AppInboxSampleApp" */;
+			buildConfigurationList = 3E4947E329F65C0400964472 /* Build configuration list for PBXProject "NotificationInboxSampleApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -228,7 +228,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3E4947E729F65C0400964472 /* AppInboxSampleApp */,
+				3E4947E729F65C0400964472 /* NotificationInboxSampleApp */,
 			);
 		};
 /* End PBXProject section */
@@ -250,24 +250,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		385F9D2C9197B8DC499804B8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppInboxSampleApp/Pods-AppInboxSampleApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AppInboxSampleApp/Pods-AppInboxSampleApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppInboxSampleApp/Pods-AppInboxSampleApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F591F002BB30B6EC93402856 /* [CP] Check Pods Manifest.lock */ = {
+		1E2BFB98E3557C2DF0B011D3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -282,11 +265,28 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AppInboxSampleApp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-NotificationInboxSampleApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		957F727773CCDD5DD362BCE0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -381,10 +381,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = NotificationInboxSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = NotificationInboxSampleApp;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -435,9 +437,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = NotificationInboxSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = NotificationInboxSampleApp;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -447,7 +451,7 @@
 		};
 		3E4947FD29F65C0500964472 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1318B050E31184FA69D8C5A4 /* Pods-AppInboxSampleApp.debug.xcconfig */;
+			baseConfigurationReference = 09E91D97738C9EBAE5734AD3 /* Pods-NotificationInboxSampleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,7 +460,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S7X7V9YPX7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AppInboxSampleApp/Info.plist;
+				INFOPLIST_FILE = NotificationInboxSampleApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -467,7 +471,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.webengage.AppInboxSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.webengage.NotificationInboxSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "AppInboxSampleApp-Bridging-Header.h";
@@ -479,7 +483,7 @@
 		};
 		3E4947FE29F65C0500964472 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C7FB8831554AC49FD017541 /* Pods-AppInboxSampleApp.release.xcconfig */;
+			baseConfigurationReference = 9EA2DB6D48F12C9AAF891A90 /* Pods-NotificationInboxSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -488,7 +492,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S7X7V9YPX7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AppInboxSampleApp/Info.plist;
+				INFOPLIST_FILE = NotificationInboxSampleApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -499,7 +503,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.webengage.AppInboxSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.webengage.NotificationInboxSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "AppInboxSampleApp-Bridging-Header.h";
@@ -511,7 +515,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E4947E329F65C0400964472 /* Build configuration list for PBXProject "AppInboxSampleApp" */ = {
+		3E4947E329F65C0400964472 /* Build configuration list for PBXProject "NotificationInboxSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E4947FA29F65C0500964472 /* Debug */,
@@ -520,7 +524,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E4947FC29F65C0500964472 /* Build configuration list for PBXNativeTarget "AppInboxSampleApp" */ = {
+		3E4947FC29F65C0500964472 /* Build configuration list for PBXNativeTarget "NotificationInboxSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E4947FD29F65C0500964472 /* Debug */,

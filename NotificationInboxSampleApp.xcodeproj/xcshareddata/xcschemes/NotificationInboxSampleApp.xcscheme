@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E4947E729F65C0400964472"
-               BuildableName = "AppInboxSampleApp.app"
-               BlueprintName = "AppInboxSampleApp"
-               ReferencedContainer = "container:AppInboxSampleApp.xcodeproj">
+               BuildableName = "NotificationInboxSampleApp.app"
+               BlueprintName = "NotificationInboxSampleApp"
+               ReferencedContainer = "container:NotificationInboxSampleApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E4947E729F65C0400964472"
-            BuildableName = "AppInboxSampleApp.app"
-            BlueprintName = "AppInboxSampleApp"
-            ReferencedContainer = "container:AppInboxSampleApp.xcodeproj">
+            BuildableName = "NotificationInboxSampleApp.app"
+            BlueprintName = "NotificationInboxSampleApp"
+            ReferencedContainer = "container:NotificationInboxSampleApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E4947E729F65C0400964472"
-            BuildableName = "AppInboxSampleApp.app"
-            BlueprintName = "AppInboxSampleApp"
-            ReferencedContainer = "container:AppInboxSampleApp.xcodeproj">
+            BuildableName = "NotificationInboxSampleApp.app"
+            BlueprintName = "NotificationInboxSampleApp"
+            ReferencedContainer = "container:NotificationInboxSampleApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
