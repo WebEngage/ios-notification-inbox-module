@@ -10,6 +10,7 @@ import UIKit
 
 struct WEUtils{
     
+    // ===== This method takes in the HTML raw string and returns the Attributed String =====
     static func getAttributedString(rawString: String,forLabelType: labelType, withSize size: CGFloat, withFont fontFamily: String, withColor color: UIColor) -> NSAttributedString {
         var text:NSAttributedString = NSAttributedString()
         var newFont: UIFont
@@ -40,6 +41,7 @@ struct WEUtils{
         return text
     }
 
+    // ===== This method is used to find how old the notification is from the current time =====
     static func getTimeAgo(notificationTime : String) -> String{
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .full
@@ -57,6 +59,7 @@ struct WEUtils{
         return "\(notificationTime)"
     }
     
+    // ===== This method is use to convert the time to desired time format.
     static func getTime(withFormat: String, forTime time: String) -> String {
         
         let dateFormatter = DateFormatter()
@@ -69,6 +72,7 @@ struct WEUtils{
         return time
     }
     
+    // ====== This method takes in the custom proterties from the user and override them with the default properties =====
     static func setupCustomConfiguration(customConfiguration: AnyObject, cellStyle: DefaultCellConfiguration) -> DefaultCellConfiguration{
         
         if let customConfig = customConfiguration as? WEPushCardConfigutationProtocol{
