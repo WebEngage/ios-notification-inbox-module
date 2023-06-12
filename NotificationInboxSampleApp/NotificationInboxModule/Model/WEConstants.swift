@@ -27,6 +27,21 @@ import Foundation
     }
 }
 
+@objc class CellTypeHelper: NSObject {
+    @objc static func stringValue(forEnumValue enumValue: CellType) -> NSString {
+        switch enumValue {
+        case .text:
+            return "TEXT"
+        case .banner:
+            return "BANNER"
+        case .rating:
+            return "RATING"
+        case .carousel:
+            return "CAROUSEL"
+        }
+    }
+}
+
 @objc enum customConfig: Int{
     case text
     case banner
