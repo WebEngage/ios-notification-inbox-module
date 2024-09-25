@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E2129762CA3E48E00F37208 /* WEPushTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2129752CA3E48E00F37208 /* WEPushTextTableViewCell.xib */; };
 		3E39F86629FB661500D1B992 /* WEUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E39F86529FB661500D1B992 /* WEUtils.swift */; };
 		3E39F86829FB697200D1B992 /* WEPushCellProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E39F86729FB697200D1B992 /* WEPushCellProtocols.swift */; };
 		3E4947EC29F65C0400964472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4947EB29F65C0400964472 /* AppDelegate.swift */; };
@@ -16,7 +17,6 @@
 		3E4947F529F65C0500964472 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E4947F429F65C0500964472 /* Assets.xcassets */; };
 		3E4947F829F65C0500964472 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E4947F629F65C0500964472 /* LaunchScreen.storyboard */; };
 		3E49482029F66B3A00964472 /* WENotificationInboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E49481F29F66B3A00964472 /* WENotificationInboxViewController.swift */; };
-		3E7B513A2A31EAC2001256F3 /* WEPushTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B51392A31EAC2001256F3 /* WEPushTextTableViewCell.xib */; };
 		3E8A5E712A31F57600E22868 /* WENotificationInboxViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A5E702A31F57600E22868 /* WENotificationInboxViewControllerExtension.swift */; };
 		3E970F502A319F1300266F7B /* WEDefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E970F4F2A319F1300266F7B /* WEDefaultCell.swift */; };
 		3E970F522A31A83600266F7B /* WEConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E970F512A31A83600266F7B /* WEConstants.swift */; };
@@ -24,13 +24,15 @@
 		3EBC5CF02A025A7A004780C7 /* WEPushBannerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC5CEF2A025A7A004780C7 /* WEPushBannerTableViewCell.xib */; };
 		3EBC5CF32A025AD5004780C7 /* WEPushTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBC5CF12A025AD5004780C7 /* WEPushTextTableViewCell.swift */; };
 		3EBC5CF42A025AD5004780C7 /* WEPushBannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBC5CF22A025AD5004780C7 /* WEPushBannerTableViewCell.swift */; };
-		D6C3063BD910828D26DD8646 /* libPods-NotificationInboxSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F1DA83AE0963AD0B6B06B8 /* libPods-NotificationInboxSampleApp.a */; };
+		A3299E0EF3152F4EB32C450E /* libPods-NotificationInboxSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD23E0E29A7F69312B6EE342 /* libPods-NotificationInboxSampleApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		09E91D97738C9EBAE5734AD3 /* Pods-NotificationInboxSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationInboxSampleApp.debug.xcconfig"; path = "Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		127BD53BE0525F9FDE4C7077 /* Pods-NotificationInboxSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationInboxSampleApp.release.xcconfig"; path = "Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		34AE4B4319E35DAE1660D9C1 /* Pods-NotificationInboxSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationInboxSampleApp.debug.xcconfig"; path = "Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		3E14571A2A01030000C29BED /* WENotificationInbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WENotificationInbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E14571F2A010DDC00C29BED /* WENotificationInbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WENotificationInbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E2129752CA3E48E00F37208 /* WEPushTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WEPushTextTableViewCell.xib; sourceTree = "<group>"; };
 		3E39F86529FB661500D1B992 /* WEUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEUtils.swift; sourceTree = "<group>"; };
 		3E39F86729FB697200D1B992 /* WEPushCellProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEPushCellProtocols.swift; sourceTree = "<group>"; };
 		3E4947E829F65C0400964472 /* NotificationInboxSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationInboxSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,7 +46,6 @@
 		3E49480529F65E9A00964472 /* NotificationInboxSampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotificationInboxSampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		3E49481F29F66B3A00964472 /* WENotificationInboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WENotificationInboxViewController.swift; sourceTree = "<group>"; };
 		3E62D69C29FB54F900362BFF /* WENotificationInbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WENotificationInbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E7B51392A31EAC2001256F3 /* WEPushTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WEPushTextTableViewCell.xib; path = ../../../../../../../WEPushTextTableViewCell.xib; sourceTree = "<group>"; };
 		3E8A5E702A31F57600E22868 /* WENotificationInboxViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WENotificationInboxViewControllerExtension.swift; sourceTree = "<group>"; };
 		3E970F4F2A319F1300266F7B /* WEDefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEDefaultCell.swift; sourceTree = "<group>"; };
 		3E970F512A31A83600266F7B /* WEConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WEConstants.swift; sourceTree = "<group>"; };
@@ -52,8 +53,7 @@
 		3EBC5CEF2A025A7A004780C7 /* WEPushBannerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WEPushBannerTableViewCell.xib; sourceTree = "<group>"; };
 		3EBC5CF12A025AD5004780C7 /* WEPushTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WEPushTextTableViewCell.swift; sourceTree = "<group>"; };
 		3EBC5CF22A025AD5004780C7 /* WEPushBannerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WEPushBannerTableViewCell.swift; sourceTree = "<group>"; };
-		75F1DA83AE0963AD0B6B06B8 /* libPods-NotificationInboxSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotificationInboxSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9EA2DB6D48F12C9AAF891A90 /* Pods-NotificationInboxSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationInboxSampleApp.release.xcconfig"; path = "Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		DD23E0E29A7F69312B6EE342 /* libPods-NotificationInboxSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotificationInboxSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6C3063BD910828D26DD8646 /* libPods-NotificationInboxSampleApp.a in Frameworks */,
+				A3299E0EF3152F4EB32C450E /* libPods-NotificationInboxSampleApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,8 +125,8 @@
 		3E49480929F6626D00964472 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				3E7B51392A31EAC2001256F3 /* WEPushTextTableViewCell.xib */,
 				3EBC5CEF2A025A7A004780C7 /* WEPushBannerTableViewCell.xib */,
+				3E2129752CA3E48E00F37208 /* WEPushTextTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 				3E14571F2A010DDC00C29BED /* WENotificationInbox.framework */,
 				3E14571A2A01030000C29BED /* WENotificationInbox.framework */,
 				3E62D69C29FB54F900362BFF /* WENotificationInbox.framework */,
-				75F1DA83AE0963AD0B6B06B8 /* libPods-NotificationInboxSampleApp.a */,
+				DD23E0E29A7F69312B6EE342 /* libPods-NotificationInboxSampleApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -174,8 +174,8 @@
 		604F5593FDA8AB22B7FD94D6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				09E91D97738C9EBAE5734AD3 /* Pods-NotificationInboxSampleApp.debug.xcconfig */,
-				9EA2DB6D48F12C9AAF891A90 /* Pods-NotificationInboxSampleApp.release.xcconfig */,
+				34AE4B4319E35DAE1660D9C1 /* Pods-NotificationInboxSampleApp.debug.xcconfig */,
+				127BD53BE0525F9FDE4C7077 /* Pods-NotificationInboxSampleApp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -187,11 +187,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E4947FC29F65C0500964472 /* Build configuration list for PBXNativeTarget "NotificationInboxSampleApp" */;
 			buildPhases = (
-				1E2BFB98E3557C2DF0B011D3 /* [CP] Check Pods Manifest.lock */,
+				F60E96849BB1794719F3E8B2 /* [CP] Check Pods Manifest.lock */,
 				3E4947E429F65C0400964472 /* Sources */,
 				3E4947E529F65C0400964472 /* Frameworks */,
 				3E4947E629F65C0400964472 /* Resources */,
-				957F727773CCDD5DD362BCE0 /* [CP] Embed Pods Frameworks */,
+				AB00052751F7AE7521797B70 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -245,15 +245,32 @@
 				3E4947F529F65C0500964472 /* Assets.xcassets in Resources */,
 				3EBC5CF02A025A7A004780C7 /* WEPushBannerTableViewCell.xib in Resources */,
 				3EB5EF1D2A00A5600041533E /* WENotificationInbox.storyboard in Resources */,
+				3E2129762CA3E48E00F37208 /* WEPushTextTableViewCell.xib in Resources */,
 				3E4947F329F65C0400964472 /* Main.storyboard in Resources */,
-				3E7B513A2A31EAC2001256F3 /* WEPushTextTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E2BFB98E3557C2DF0B011D3 /* [CP] Check Pods Manifest.lock */ = {
+		AB00052751F7AE7521797B70 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F60E96849BB1794719F3E8B2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -273,23 +290,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		957F727773CCDD5DD362BCE0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NotificationInboxSampleApp/Pods-NotificationInboxSampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -455,7 +455,7 @@
 		};
 		3E4947FD29F65C0500964472 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09E91D97738C9EBAE5734AD3 /* Pods-NotificationInboxSampleApp.debug.xcconfig */;
+			baseConfigurationReference = 34AE4B4319E35DAE1660D9C1 /* Pods-NotificationInboxSampleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -487,7 +487,7 @@
 		};
 		3E4947FE29F65C0500964472 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EA2DB6D48F12C9AAF891A90 /* Pods-NotificationInboxSampleApp.release.xcconfig */;
+			baseConfigurationReference = 127BD53BE0525F9FDE4C7077 /* Pods-NotificationInboxSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
